@@ -3,6 +3,7 @@
 * Problem C - Two Teams Composing
 * Time: 343 ms
 * AUTHOR: Eng. Astik Roy
+**/
 
 #include <iostream>
 
