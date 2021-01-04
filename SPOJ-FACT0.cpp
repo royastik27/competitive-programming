@@ -24,6 +24,7 @@ void factorize(long long int n){
         cout << prime << '^' << count;
     }
 
+    // all prime factors up to square root of n
     for(i = 3; i*i<=n; i+=2){
         if(n%i == 0){
             prime = i;
@@ -39,6 +40,8 @@ void factorize(long long int n){
         }
     }
 
+    // there is only one prime factor
+    // which is greater than the square root of n
     if(n > 1){
         ++primeCount;
         if(primeCount > 1) cout << ' ';
