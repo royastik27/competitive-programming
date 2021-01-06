@@ -1,7 +1,7 @@
 /**
 * Codeforces Contest 1354
 * Problem B - Ternary String
-* Time: 93 ms.
+* Time: 93 ms
 * AUTHOR: Eng. Astik Roy
 **/
 
