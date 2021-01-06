@@ -47,7 +47,7 @@ int main()
     return 0;
 }
 
-/* A Naive Solution */
+/* A Naive Solution :: Time 12 ms */
 /*
 #include <iostream>
 
