@@ -35,8 +35,9 @@ int main()
             token = strtok(NULL, " ");
         }
         nElements = i;
-
-       cin.getline(str, LIMIT);
+        
+        cin.getline(str, LIMIT);
+        
         // process numbers
         i = 0;
         token = strtok(str, " ");
