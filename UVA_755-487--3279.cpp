@@ -1,5 +1,6 @@
 /**
 * UVA 755 - 487--3279 (Using Trie)
+* Totally tricky, unique and readable solution
 * Rank: 450
 * Time: 290 ms
 * AUTHOR: Eng. Astik Roy
