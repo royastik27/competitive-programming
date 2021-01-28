@@ -43,7 +43,7 @@ int main()
             adj[j].push_back(i);
         }
 
-        // DFS
+        // BFS
         que.push(0);
         color[0] = WHITE;
         currentColor = WHITE;
