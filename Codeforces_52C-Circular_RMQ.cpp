@@ -111,7 +111,7 @@ int main()
     {
         cin.getline(input, 22);
 
-        // processing input
+        // parsing input
         token = strtok(input, " ");
         leftIndex = atoi(token);
 
