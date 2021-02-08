@@ -1,6 +1,5 @@
 /**
-* Sphere Online Judge
-* Problem: RPLA - Answer the boss!
+* SPOJ RPLA - Answer the boss!
 * Time: 0.15 sec
 * AUTHOR: Eng. Astik Roy
 **/
