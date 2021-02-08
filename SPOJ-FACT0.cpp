@@ -1,5 +1,5 @@
 /**
-* SPOJ - FACT0 (Integer Factorization) (15 digits)
+* SPOJ FACT0 - Integer Factorization (15 digits)
 * Optimized Solution
 * AUTHOR: Eng. Astik Roy
 **/
