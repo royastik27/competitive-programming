@@ -1,6 +1,5 @@
 /**
-* Sphere Online Judge
-* Problem: HORRIBLE - Horrible Queries
+* Sphere HORRIBLE - Horrible Queries
 * Time: 0.66 sec
 * AUTHOR: Eng. Astik Roy
 **/
