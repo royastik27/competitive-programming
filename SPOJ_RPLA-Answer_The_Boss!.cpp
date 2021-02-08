@@ -1,7 +1,7 @@
 /**
 * Sphere Online Judge
 * Problem: RPLA - Answer the boss!
-* Time: 0.50 sec
+* Time: 0.15 sec
 * AUTHOR: Eng. Astik Roy
 **/
 
@@ -15,7 +15,7 @@ using namespace std;
 
 int main()
 {
-    int TC, nEmployees, nRelations, indegree[MAX], current, Size, i, j, k;
+    int TC, nEmployees, nRelations, indegree[MAX], current, Size, visited, i, j, k;
     vector <int> adj[MAX];
     queue <int> que;
 
@@ -38,14 +38,19 @@ int main()
         }
 
         cout << "Scenario #" << k << ":\n";
+        visited = 0;
         // topological sort
         for(i = 1; i <= nEmployees; ++i)
         {
+            if(visited == nEmployees)
+                break;
+
             for(j = 0; j < nEmployees; ++j)
             {
                 if(indegree[j] == 0)
                 {
                     indegree[j] = -1;
+                    ++visited;
                     que.push(j);
                 }
             }
