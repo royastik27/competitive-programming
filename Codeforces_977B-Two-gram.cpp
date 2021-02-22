@@ -1,5 +1,6 @@
 /**
 * Codeforces Contest 977
+* Codeforces Round #479 (Div. 3)
 * Problem B - Two-gram
 * Time: 15 ms
 * AUTHOR: Eng. Astik Roy
