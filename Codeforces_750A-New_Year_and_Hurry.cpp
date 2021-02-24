@@ -37,6 +37,7 @@ int main()
 
     cin >> nProblems >> timeToGo;
 
+    // prefix sum of times
     for(int i = 1; i <= nProblems; ++i)
         times[i] = times[i - 1] + (i * 5);
 
