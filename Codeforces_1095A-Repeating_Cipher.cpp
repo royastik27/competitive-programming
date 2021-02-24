@@ -1,7 +1,8 @@
 /**
 * Codeforces Problem 1095
 * Codeforces Round #529 (Div. 3)
-* Time: 15 ms
+* Problem A - Repeating Cipher
+* Time: 31 ms
 * AUTHOR: Astik Roy
 **/
 
