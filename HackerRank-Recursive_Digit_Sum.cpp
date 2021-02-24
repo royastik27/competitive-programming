@@ -1,5 +1,6 @@
 /**
 * HackerRank - Recursive Digit Sum
+* Time: 349 ms
 * AUTHOR: Astik Roy
 **/
 
