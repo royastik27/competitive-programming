@@ -1,6 +1,6 @@
 /**
 * UVA 10986 - Sending Email
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
