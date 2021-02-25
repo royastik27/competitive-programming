@@ -1,6 +1,6 @@
 /**
 * UVA 10267 - Graphical Editor
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
