@@ -1,6 +1,6 @@
 /**
 * UVA 10104 - Euclid Problem
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
