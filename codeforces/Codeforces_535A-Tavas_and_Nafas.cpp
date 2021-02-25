@@ -2,7 +2,7 @@
 * Codeforces Problem 535
 * Codeforces Round #299 (Div. 2)
 * Problem A - Tavas and Nafas
-* Time: 15 ms
+* Time: 31 ms
 * AUTHOR: Astik Roy
 **/
 
@@ -17,19 +17,18 @@ int main()
 
     int num;
 
-    while(cin >> num)
+    cin >> num;
+
+    if(num <= 19)
+        cout << first[num] << '\n';
+    else
     {
-        if(num <= 19)
-            cout << first[num] << '\n';
-        else
-        {
-            cout << second[num / 10];
+        cout << second[num / 10];
 
-            if(num % 10 != 0)
-                cout << '-' << first[num % 10];
+        if(num % 10 != 0)
+            cout << '-' << first[num % 10];
 
-            cout << '\n';
-        }
+        cout << '\n';
     }
 
     return 0;
