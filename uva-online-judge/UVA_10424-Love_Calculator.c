@@ -1,6 +1,6 @@
 /**
 * UVA 10424 - Love Calculator
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <stdio.h>
