@@ -1,6 +1,7 @@
 /**
 * UVA 11057 - Exact Sum
 * With Number Theory (Solved without any previous knowledge about this :D )
+* AUTHOR: Astik Roy
 **/
 
 #include <stdio.h>
