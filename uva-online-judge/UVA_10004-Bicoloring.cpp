@@ -1,6 +1,6 @@
 /**
 * UVA 10004 - Bicoloring
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
