@@ -1,6 +1,6 @@
 /**
 * UVA 10945 - Mother Bear
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
