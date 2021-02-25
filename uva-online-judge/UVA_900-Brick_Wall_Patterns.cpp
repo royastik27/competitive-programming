@@ -1,7 +1,7 @@
 /**
 * UVA 900 - Brick Wall Patters
 * The pattern is actually the Fibonacci sequence
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
