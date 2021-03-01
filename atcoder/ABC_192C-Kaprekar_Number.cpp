@@ -1,5 +1,5 @@
 /**
-* Atcoder Beginner Contest 192
+* AtCoder Beginner Contest 192
 * Problem C - Kaprekar Number
 * Time: 34 ms
 * Author: Astik Roy
