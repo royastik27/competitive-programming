@@ -1,5 +1,5 @@
 /**
-* Atcoder Beginner Contest 192
+* AtCoder Beginner Contest 192
 * Problem B - uNrEaDaBlE sTrInG
 * Time: 5 ms
 * Author: Astik Roy
