@@ -1,5 +1,5 @@
 /**
-* Atcoder Beginner Contest 192
+* AtCoder Beginner Contest 192
 * Problem A - Star
 * Time: 8 ms
 * Author: Astik Roy
