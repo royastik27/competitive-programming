@@ -1,5 +1,5 @@
 /**
-* Atcoder Beginner Contest 193
+* AtCoder Beginner Contest 193
 * Problem B - Play Snuke
 * Time: 97 ms
 * AUTHOR: Astik Roy
