@@ -1,5 +1,5 @@
 /**
-* Atcoder Beginner Contest 186
+* AtCoder Beginner Contest 186
 * Problem C - Unlucky 7
 * Fascinating Octal Converting Algorithm
 * Time: 9 ms
