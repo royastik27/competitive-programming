@@ -3,7 +3,7 @@
 * Problem B - Blocks on Grid
 * Unique Solution
 * Time: 10 ms
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
