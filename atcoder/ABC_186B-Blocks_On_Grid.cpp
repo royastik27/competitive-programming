@@ -1,5 +1,5 @@
 /**
-* Atcoder Beginner Contest 186
+* AtCoder Beginner Contest 186
 * Problem B - Blocks on Grid
 * Unique Solution
 * Time: 10 ms
