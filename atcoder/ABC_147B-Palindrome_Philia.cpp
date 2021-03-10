@@ -2,6 +2,7 @@
 * AtCoder Beginner Contest 147
 * Problem B - Palindrome Philia
 * Time: 9 ms
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
