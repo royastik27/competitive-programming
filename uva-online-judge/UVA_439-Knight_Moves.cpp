@@ -10,10 +10,17 @@ using namespace std;
 
 #define INF 100
 
-typedef struct
+struct board
 {
     int row, col;
-}Grid;
+
+    bool operator ==(struct board &a)
+    {
+        return (row == a.row && col == a.col);
+    }
+};
+
+typedef struct board Grid;
 
 int rowMove[8] = {-2, -2, -1, -1, 1, 1, 2, 2 },
 colMove[8] = {-1, 1, -2, 2, -2, 2, -1, 1};
@@ -39,7 +46,7 @@ int find_moves(Grid src, Grid dest)
     {
         curr = que.front();
 
-        if(curr.row == dest.row && curr.col == dest.col)
+        if(curr == dest)
             return moves[dest.row][dest.col];
 
         que.pop();
