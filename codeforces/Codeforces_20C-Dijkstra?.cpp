@@ -2,7 +2,7 @@
 * Codeforces Problem 20
 * Codeforces Alpha Round #20 (Codeforces format)
 * Problem C - Dijkstra?
-* Time: 514 ms
+* Time: 561 ms
 * AUTHOR: Astik Roy
 **/
 
@@ -52,12 +52,10 @@ int main()
 
     // shortest-path
     dist[1] = 0;
-    prev[1] = 0;
+    prev[nVertices] = -1;
+
     for(i = 2; i <= nVertices; ++i)
-    {
-        prev[i] = -1;
         dist[i] = INF;
-    }
 
     priority_queue <int> que;
 
