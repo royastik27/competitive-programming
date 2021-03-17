@@ -19,11 +19,6 @@ struct Vertex
 {
     int node;
     long long int weight;
-
-    bool operator < (struct Vertex second)
-    {
-        return weight > second.weight;
-    }
 };
 
 typedef struct Vertex Vertex;
