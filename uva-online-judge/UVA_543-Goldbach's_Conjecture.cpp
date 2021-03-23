@@ -1,6 +1,6 @@
 /**
-* UVA - 11466 (Goldbach's Conjecture)
-* AUTHOR: Eng. Astik Roy
+* UVA 543 - Goldbach's Conjecture
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
