@@ -2,7 +2,7 @@
 * Codeforces Contest 1354
 * Problem B - Ternary String
 * Time: 93 ms
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
@@ -59,7 +59,6 @@ int main()
     {
         cin >> str;
 
-        // call the function
         cout << maxTernary(str) << '\n';
     }
 
