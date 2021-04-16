@@ -1,6 +1,6 @@
 /**
 * Counting Substring - Linear Scan
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <stdio.h>
