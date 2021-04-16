@@ -1,7 +1,7 @@
 /**
 * Codeforces Round #715 (Div. 2)
 * Problem A - Average Height
-* Time: 15 ms
+* Time: 31 ms
 * AUTHOR: Astik Roy
 **/
 
