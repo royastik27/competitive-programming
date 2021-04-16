@@ -2,6 +2,7 @@
 * Codeforces Round #677 (Div. 3)
 * Problem C - Dominant Piranha
 * Time: 717 ms
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
