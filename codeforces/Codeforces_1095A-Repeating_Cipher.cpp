@@ -1,5 +1,4 @@
 /**
-* Codeforces Problem 1095
 * Codeforces Round #529 (Div. 3)
 * Problem A - Repeating Cipher
 * Time: 31 ms
