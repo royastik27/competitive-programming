@@ -1,7 +1,7 @@
 /**
 * Codeforces Round #578 (Div. 2)
 * Problem A - Hotelier
-* Time: 46 ms
+* Time: 30 ms
 * AUTHOR: Astik Roy
 **/
 
@@ -11,6 +11,9 @@ using namespace std;
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     char rooms[] = "0000000000";
     int nEvents;
     char operation[100001];
