@@ -1,7 +1,7 @@
 /**
 * LightOJ 1112 - Curious Robin Hood
 * Time: 471 ms
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
