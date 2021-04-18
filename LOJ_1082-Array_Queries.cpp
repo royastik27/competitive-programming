@@ -1,7 +1,7 @@
 /**
 * LightOJ 1082 - Array Queries
 * Time: 656 ms
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
