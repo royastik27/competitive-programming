@@ -1,7 +1,7 @@
 /**
 * LightOJ 1164 - Horrible Queries
 * Time: 675 ms
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
