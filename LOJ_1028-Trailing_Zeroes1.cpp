@@ -4,12 +4,6 @@
 * AUTHOR: Astik Roy
 **/
 
-/**
-* LightOJ 1028 - Trailing Zeroes (I)
-* Time: 359 ms
-* AUTHOR: Astik Roy
-**/
-
 #include <stdio.h>
 #include <cmath>
 
