@@ -1,5 +1,11 @@
 /**
 * LightOJ 1028 - Trailing Zeroes (I)
+* Time: 306 ms
+* AUTHOR: Astik Roy
+**/
+
+/**
+* LightOJ 1028 - Trailing Zeroes (I)
 * Time: 359 ms
 * AUTHOR: Astik Roy
 **/
@@ -12,12 +18,11 @@ using namespace std;
 #define PRIME_LIMIT 78504
 #define LIMIT 1000100
 
-long long int primes[PRIME_LIMIT];
+int primes[PRIME_LIMIT];
 
 void seive()
 {
-    long long int i, j;
-    int root = sqrt(LIMIT), k = -1;
+    int i, j, root = sqrt(LIMIT), k = -1;
     bool isPrime[LIMIT + 1];
 
     for(i = 3; i <= LIMIT; i += 2)
@@ -60,7 +65,7 @@ int main()
 
         NOD = 1;
 
-        for(i = 0; primes[i]*primes[i] <= num; ++i)
+        for(i = 0; (long long int)primes[i]*primes[i] <= num; ++i)
         {
             if(num % primes[i] == 0)
             {
