@@ -6,7 +6,6 @@
 **/
 
 #include <iostream>
-#include <cstring>
 
 #define LIMIT 1001
 #define EMPTY_VALUE -1
