@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #367 (Div. 2)
 * Problem B - Interesting Drink
+* Binary Search Solution
 * Time: 311 ms
 * AUTHOR: Astik Roy
 **/
