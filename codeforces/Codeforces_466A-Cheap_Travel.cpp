@@ -1,7 +1,7 @@
 /**
 * Codeforces Round #266 (Div. 2)
 * Problem A - Cheap Travel
-* Time: 31 ms
+* Time: 15 ms
 * AUTHOR: Astik Roy
 **/
 
@@ -22,10 +22,8 @@ int main()
 
     if(m > n)
     {
-        special = 1;
-
-        if(special*b < n*a)
-            cost = special * b;
+        if(b < n*a)
+            cost = b;
         else cost = n*a;
     }
     else
