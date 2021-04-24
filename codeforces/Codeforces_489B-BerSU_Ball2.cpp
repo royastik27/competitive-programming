@@ -8,7 +8,6 @@
  
 #include <iostream>
 #include <algorithm>
-#include <cstring>
 #include <cmath>
  
 using namespace std;
