@@ -1,6 +1,6 @@
 /**
 * UVA 374 - Big Mod
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <stdio.h>
