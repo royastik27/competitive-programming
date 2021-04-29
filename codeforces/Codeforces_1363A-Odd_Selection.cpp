@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #646 (Div. 2)
 * Problem A - Odd Selection
+* Unique Solution
 * Time: 78 ms
 * AUTHOR: Astik Roy
 **/
