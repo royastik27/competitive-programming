@@ -45,7 +45,6 @@ int query(int b, int e, int node)
     else if(b > j || e < i || b+1 == e)
         return 0;
 
-
     int left, right, mid;
     left = node * 2;
     right = left + 1;
