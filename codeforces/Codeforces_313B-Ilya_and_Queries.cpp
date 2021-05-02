@@ -38,7 +38,7 @@ void build(int b, int e, int node)
     tree[node] = tree[left] + tree[right];
 }
 
-int  query(int b, int e, int node)
+int query(int b, int e, int node)
 {
     if(b >= i && e <= j)
         return tree[node];
