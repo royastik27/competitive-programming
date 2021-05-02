@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #186 (Div. 2)
 * Porblem B - Ilya and Queries
+* Segment Tree Solution
 * Time: 654 ms
 * AUTHOR: Astik Roy
 **/
