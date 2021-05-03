@@ -1,7 +1,7 @@
 /**
 * Codeforces Round 1335
 * Problem C - Two Teams Composing
-* Time: 343 ms
+* Time: 327 ms
 * AUTHOR: Eng. Astik Roy
 **/
 
