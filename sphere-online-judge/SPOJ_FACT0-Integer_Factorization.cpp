@@ -1,7 +1,7 @@
 /**
 * SPOJ FACT0 - Integer Factorization (15 digits)
 * Optimized Solution
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
