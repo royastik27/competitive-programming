@@ -1,7 +1,7 @@
 /**
 * SPOJ TOPOSORT - Topological Sorting
 * Time: 0.41 sec
-* AUTHOR: Eng. Astik Roy
+* AUTHOR: Astik Roy
 **/
 
 #include <iostream>
