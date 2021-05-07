@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #627 (Div. 3)
 * Problem B - Yet Another Palindrome Problem
+* Totally Unique Solution in O(n) Time Complexity
 * Time: 31 ms
 * AUTHOR: Astik Roy
 **/
