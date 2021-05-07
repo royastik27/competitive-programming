@@ -17,7 +17,6 @@ using namespace std;
 
 int main()
 {
-    //int n, ara[LIMIT];
     int n, dist, idx;
     vector <int> vec;
     vector <int>::iterator it;
