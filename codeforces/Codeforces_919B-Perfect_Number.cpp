@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #460 (Div. 2)
 * Problem B - Perfect Number
+* Unique Solution
 * Time: 30 ms
 * AUTHOR: Astik Roy
 **/
