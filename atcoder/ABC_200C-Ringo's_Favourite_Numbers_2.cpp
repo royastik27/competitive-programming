@@ -1,7 +1,7 @@
 /**
 * AtCoder Beginner Contest 200
 * Problem C - Ringo's Favorite Numbers 2
-* Time: 
+* Time: 76 ms
 * AUTHOR: Astik Roy
 **/
 
