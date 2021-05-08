@@ -5,6 +5,7 @@
 * AUTHOR: Astik Roy
 **/
 
+#include <iostream>
 #include <cstring>
  
 using namespace std;
