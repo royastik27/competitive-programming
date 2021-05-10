@@ -1,5 +1,4 @@
 /**
-* Codeforces Problem 1095
 * Codeforces Round #529 (Div. 3)
 * Problem B - Array Stabilization
 * Second smallest and second largest in linear scan
