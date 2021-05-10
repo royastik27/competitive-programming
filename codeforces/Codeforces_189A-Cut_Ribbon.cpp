@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #119 (Div. 2)
 * Problem A - Cut Ribbon
+* Unique Solution
 * Time: 15 ms
 * AUTHOR: Astik Roy
 **/
