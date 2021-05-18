@@ -1,6 +1,7 @@
 /**
 * Codeforces Round #710 (Div. 3)
 * Problem B - Partial Replacement
+* Totally Unique Solution
 * Time: 15 ms
 * AUTHOR: Astik Roy
 **/
