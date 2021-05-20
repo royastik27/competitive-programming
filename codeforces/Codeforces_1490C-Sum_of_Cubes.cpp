@@ -45,6 +45,7 @@ int main()
 
         is_representable = false;
 
+        // two pointer method for matching sum of two elements
         while(low <= high)
         {
             sum = num[low] + num[high];
