@@ -16,7 +16,7 @@ int main()
 {
     ios_base::sync_with_stdio(0);
 
-    int nVertices, par, res, Count;
+    int nVertices, par, Count;
     vector <int> con[LIM];
     register int i, j;
 
@@ -27,7 +27,6 @@ int main()
         con[par].push_back(i);
     }
 
-    res = 0;
     for(i = 1; i <= nVertices; ++i) {
 
         if(!con[i].size())
