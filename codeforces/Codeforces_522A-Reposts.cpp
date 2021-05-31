@@ -36,7 +36,6 @@ string tolwr(string a)
 
 int main()
 {
-    map <string, vector <string> >::iterator it;
     string x, y;
     register int i;
 
