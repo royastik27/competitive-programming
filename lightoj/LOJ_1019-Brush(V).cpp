@@ -1,4 +1,3 @@
-  
 /**
 * LightOJ 1019 - Brush (V)
 * Time: 19 ms
