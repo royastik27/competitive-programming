@@ -107,7 +107,7 @@ int main()
                 // for face card
                 play(top - 10);
 
-                if(isWon) break; // opponent won ( change active player )
+                if(isWon) break; // opponent won
             }
 
             activePlayer ^= 1; // changing active player
