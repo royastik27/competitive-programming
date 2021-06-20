@@ -12,6 +12,7 @@ using namespace std;
 int main()
 {
     ios_base::sync_with_stdio(0);
+    //cin.tie(NULL);
 
     char str[100001];
     int n;
@@ -21,18 +22,18 @@ int main()
     if(n > 26)
         cout << "-1\n";
     else {
-        int bit, change, idx;
+        int bits, change, idx;
 
-        bit = change = 0;
+        bits = change = 0;
 
         for(int i = 0; i < n; ++i) {
             idx = (int)(str[i] - 'a');
 
-            // checking if the idx th bit is on or not
-            if(bit & (1 << idx)) ++change;
+            // checking if the idx th bits is on or not
+            if(bits & (1 << idx)) ++change;
 
-            // setting idx th bit
-            bit |= (1 << idx);
+            // setting idx th bits
+            bits |= (1 << idx);
         }
         cout << change << '\n';
     }
