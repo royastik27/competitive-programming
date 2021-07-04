@@ -1,7 +1,7 @@
 /**
  * Codeforces Round #665 (Div. 2)
  * Problem B - Ternary Sequence
- * Time: 46 ms
+ * Time: 61 ms
  * AUTHOR: Astik Roy
 **/
 
@@ -26,9 +26,6 @@ int main()
         sum = 2 * temp;
         z1 -= temp;
         y2 -= temp;
-
-        // for 2-2 pairs
-        z2 -= min(z1, z2);
 
         // for 1-1 pairs
         y1 -= min(y1, y2);
