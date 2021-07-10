@@ -1,7 +1,7 @@
 /**
  * Codeforces Beta Round #4 (Div. 2 Only)
  * Problem C - Registration system
- * Time: 1464 ms
+ * Time: 998 ms
  * AUTHOR: Astik Roy
 **/
 
@@ -30,9 +30,10 @@ int main()
             str += to_string(m[str]-1);
             cout << str << '\n';
         }
-        else cout << "OK\n";
-        
-        m[str] = 1;
+        else {
+            m[str] = 1;
+            cout << "OK\n";
+        }
     }
 
     m.clear();
