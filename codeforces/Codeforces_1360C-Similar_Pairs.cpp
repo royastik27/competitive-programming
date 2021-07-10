@@ -38,7 +38,7 @@ int main()
             m[el] = true;
         }
 
-        if(!(neven & 1) && !(nodd & 1)) cout << "YES\n";
+        if(!(neven & 1) || !(nodd & 1)) cout << "YES\n";
         else if(isabs1) cout << "YES\n";
         else cout << "NO\n";
     }
