@@ -1,6 +1,5 @@
 /**
- * 
- * Problem 
+ * UVa 101 - The Blocks Problem
  * Time: 
  * AUTHOR: Astik Roy
 **/
