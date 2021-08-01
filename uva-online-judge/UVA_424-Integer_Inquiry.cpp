@@ -1,5 +1,5 @@
 /**
- * UVA 424 - Integer Inquiry
+ * UVa 424 - Integer Inquiry
  * AUTHOR: Astik Roy
 **/
 
