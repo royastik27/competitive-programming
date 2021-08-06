@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -30,17 +31,16 @@ int main()
 
     cin >> nBlocks;
 
-    int parent[nBlocks], a, b, pa, pb;
-    vector <int> pos[nBlocks];
-    register int i;
+    int parent[nBlocks], top[nBlocks], a, b, pa, pb;
     char cmd1[5], cmd2[5];
+    stack <int> pos[nBlocks];
+    register int i;
 
     // initializing
     for(i = 0; i < nBlocks; ++i) {
         parent[i] = -1;
-        pos[i].push_back(i);
+        pos[i].push(i);
     }
-
 
     while(cin >> cmd1 && !strcmp(cmd1, "quit")) {
         cin >> a >> cmd2 >> b;
@@ -50,7 +50,14 @@ int main()
 
         if(strcmp(cmd2, "onto") == 0) {
             // returning blocks top of the block b
-            for(i = 0; pos[pa][i] != b; ++i);
+            while(pos[pb][top[pb]] != b) {  // work here
+                curr = pos[pb][top[pb]--];
+                pos[curr][++top[curr]] = curr;
+            }
+
+            for(i = 0; pos[pb][i] != b; ++i) {
+
+            }
 
             for(i = i + 1; i < pos[pa].size(); ++i)
                 pos[pa][i]
