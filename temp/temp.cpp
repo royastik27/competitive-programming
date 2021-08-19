@@ -1,5 +1,5 @@
 /**
- * 
+ * https://codeforces.com/contest/279/problem/B
  * Problem 
  * Time: 
  * AUTHOR: Astik Roy
