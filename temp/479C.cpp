@@ -1,43 +1,40 @@
 /**
- * https://codeforces.com/problemset/problem/479/C
+ * https://codeforces.com/contest/479/problem/C
  * Problem
  * Time:
  * AUTHOR: Astik Roy
+ * Implement using map
 **/
 
 #include <iostream>
-#include <map>
+#include <vector>
+#include <utility>
+#include <algorithm>
 
 using namespace std;
 
 int main()
 {
     ios_base::sync_with_stdio(0);
+    //cin.tie(NULL);
 
-    int n, a, b, res;
-    map <int, pair<int, int> > m;
-    map <int, pair<int, int> >::iterator it, it2;
+    int n, a, b, res = 0, mn;
+    vector <pair<int, int> > date;
+    register int i;
 
     cin >> n;
 
-    while(n--) {
+    for(i = 0; i < n; ++i)
         cin >> a >> b;
-
-        if(m.find(a) == m.end()) // new element
-            m[a].first = m[a].second = b;
-        else {
-            if(m[a].first > b) m[a].first = b; // for minimum value
-            else if(m[a].second < b) m[a].second = b; // for maximum value
-        }
+        date.push_back(make_pair(a, b));
     }
 
-    res = (--m.end())->second.second;
+    sort(date.begin(), date.end());
 
-    for(it = ++m.begin(), it2 = m.begin(); it != m.end(); ++it, ++it2) {
-        if(it->second.first < it2->second.first || it->second.second < it2->second.second) {
-            res = (--m.end())->first;
-            break;
-        }
+    for(i = 0; i < n; ++i) {
+        mn = min(date[i].first, date[i].second);
+        if(mn >= res) res = mn;
+        else res = max(date[i].first, date[i].second);
     }
 
     cout << res << '\n';
