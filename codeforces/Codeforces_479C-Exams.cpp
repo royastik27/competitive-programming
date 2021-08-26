@@ -18,7 +18,7 @@ int main()
 
     vector <pair <int, int> > date;
 
-    int n, a, b, res, mn, mx;
+    int n, a, b, res;
     register int i;
 
     cin >> n;
@@ -31,13 +31,8 @@ int main()
     sort(date.begin(), date.end());
 
     res = 0;
-    for(i = 0; i < n; ++i) {
-        if(date[i].first < date[i].second) mn = date[i].first, mx = date[i].second;
-        else mn = date[i].second, mx = date[i].first;
-
-        if(mn >= res) res = mn;
-        else res = mx;
-    }
+    for(i = 0; i < n; ++i)
+        res = (date[i].second >= res) ? date[i].second : date[i].first;
 
     cout << res << '\n';
 
