@@ -1,7 +1,7 @@
 /**
  * Codeforces Round #258 (Div. 2)
  * Problem B - Sort the Array
- * Time: 61 ms
+ * Time: 46 ms
  * AUTHOR: Astik Roy
 **/
 
@@ -31,7 +31,7 @@ int main()
 
             s = i - 1;
 
-            for(e = i; e <= n && ara[e] <= ara[e-1]; ++e);
+            for(e = i; e <= n && ara[e] < ara[e-1]; ++e);
             --e;
 
             // swapping
