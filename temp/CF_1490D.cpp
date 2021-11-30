@@ -6,6 +6,7 @@
 **/
 
 #include <iostream>
+#include <cstring>
 
 #define LIM 100
 
@@ -16,7 +17,7 @@ bool vis[LIM];
 
 void solve(int b, int e, int level)
 {
-    int mx = 0, mx_pos = -1, i;
+    int mx = 0, mx_pos, i;
 
     for(i = b; i <= e; ++i) {
         if(!vis[i] && ara[i] > mx) mx = ara[i], mx_pos = i;
@@ -24,7 +25,7 @@ void solve(int b, int e, int level)
 
     if(mx) {
         vis[mx_pos] = true;
-        deg[mx_pos] = level;
+        dep[mx_pos] = level;
         solve(0, mx_pos-1, level+1);
         solve(mx_pos+1, n, level+1);
     }
@@ -38,6 +39,7 @@ int main()
     //cin.tie(NULL);
 
     int TC;
+    register int i;
 
     cin >> TC;
 
@@ -47,9 +49,11 @@ int main()
 
         memset(vis, 0, n*sizeof(bool));
 
-        solve();
-    }
+        solve(0, n, 0);
 
+        for(i = 0; i <= n; ++i) cout << dep[i] << ' ';
+        cout << '\n';
+    }
 
     return 0;
 }
