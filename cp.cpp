@@ -1,3 +1,8 @@
+/**
+* C++ File Runner with royastik27 (Windows)
+* AUTHOR: Astik Roy
+**/
+
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
