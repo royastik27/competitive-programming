@@ -6,6 +6,7 @@
 **/
 
 #include <iostream>
+#include <bitset>
 #include <vector>
 #include <set>
 #include <utility>
@@ -24,47 +25,66 @@ class cmp
   }
 };
 
-// typedef struct
-// {
-//     int vertex;
-//     set < pair<int, int>, cmp >::iterator dist;
-// }Vertex;
-
 vector <pair<int, int> > adj[LIM];
 
 int MST(int nVertices)
 {
-    int mn, mnCost, selected, i, x, y;
+    int mn, mnCost, nSelected, i, x, y;
 
-    set < pair<int, int>, cmp > s;  // my min heap
-    set < pair<int, int>, cmp >::iterator dist[nVertices + 1]; // dist[i].first->node | dist[i].second->cost
+    multiset < pair<int, int>, cmp > s;  // my min heap // first -> node | second->cost
+    multiset < pair<int, int> >::iterator dist[nVertices + 1], selected; // dist[i].first->node | dist[i].second->cost
 
     // INITIALIZING FIRST NODE
     s.insert(make_pair(1, 0));
     dist[1] = s.begin();
     
-    pair < set < pair<int, int>, cmp >::iterator, bool> check;
+    multiset < pair<int, int> >::iterator check;
     // PROCESSING OTHER NODES
     for(i = 2; i <= nVertices; ++i)
     {
         check = s.insert(make_pair(i, INF));
-        dist[i] = check.first;
+        dist[i] = check;
     }
 
+    cout << "\nOur heap is ready\n";
+    for(auto it = s.begin(); it != s.end(); ++it)
+        cout << it->first << ' ' << it->second << '\n';
+
+    cout << "Set Size: " << s.size() << '\n';
+
     mnCost = 0;
-    selected = 1;
+    nSelected = 1;
 
     int lastSelected = 1;
     pair <int, int> child;
 
-    while(selected != nVertices)
+    bool visited[nVertices + 1];
+    visited[1] = true;
+
+    cout << "\nMAIN OPERATION:\n";
+    while(nSelected != nVertices)   // check for cycle
     {
         // update costs of adjacent nodes of last selected one
         for(i = 0; i < adj[lastSelected].size(); ++i)
         {
             child = adj[lastSelected][i]; // child->first = node | child->second = weight
 
-            if(dist[child->first].)
+            if(!visited[child.first] && dist[child.first]->second > child.second)
+            {
+                cout << "cost of " << child.first << " became " << child.second << '\n';
+                s.erase(dist[child.first]);
+                dist[child.first] = s.insert(make_pair(child.first, child.second));
+            }
+
+            selected = s.begin();
+
+            mnCost += selected->second;
+            lastSelected = selected->first;
+            s.erase(selected);
+
+            visited[lastSelected] = true;
+
+            ++nSelected;
         }
     }
 
@@ -87,6 +107,8 @@ int main()
         adj[u].push_back(make_pair(v, cost));
         adj[v].push_back(make_pair(u, cost));
     }
+
+    cout << "INPUT DONE\n";
 
     cout << MST(nVertices) << '\n';
 
