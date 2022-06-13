@@ -66,23 +66,8 @@ int main()
         else if(b[j] < minB) { minB = b[j]; minPosB.clear(); minPosB.push_back(j); }
       }
 
-      cout << "HERE\n";
-
-      if(a[i] == minA && b[i] == minB) continue;
-      else
-      {
-        bool found = false;
-        for(int x = 0; x < minPosA.size() && x < minPosB.size(); ++x)
-        {
-          if(minPosA[x] == minPosB[x]) { found = true; break; }
-        }
-
-        if(!found) { cout << "Impossible\n"; break; }
-
-        cout << "Swapping " << i + 1 << " and " << x + 1 << '\n';
-        swap(a, i, x);
-      }
-    }    
+      // CODE HERE      
+    }
   }
 
   return 0;
