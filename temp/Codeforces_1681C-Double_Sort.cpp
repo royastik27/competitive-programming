@@ -6,69 +6,73 @@
 **/
 
 #include <iostream>
-#include <vector>
+#include <cstring>
+#include <bitset>
+#include <algorithm>
 
 using namespace std;
 
-#define LIM 100
-#define INF 101 // check again
+#define LIM 101
 
-void swap(int ara[], int i, int j)
+bool checkBit(int n, int pos)
 {
-  ara[i] = ara[i] + ara[j];
-  ara[j] = ara[i] - ara[j];
-  ara[i] = ara[i] - ara[j];
-
-  return;
+    return n & (1 << pos);
 }
+
+void setBit(int * n, int pos) { *n |= (1 << pos); }
 
 int main()
 {
-  ios_base::sync_with_stdio(false);
-  // cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    // cin.tie(NULL);
 
-  int TC, n, a[LIM], b[LIM], minA[LIM], i, j, x;
+    int a[LIM], sortedA[LIM], b[LIM], sortedB[LIM], TC, n, i, pos[LIM];
+    bool impossible;
 
-  cin >> TC;
-  
-  cout << "HERE\n";
+    cin >> TC;
 
-  while(TC--)
-  {
-    cin >> n;
-
-    for(i = 0; i < n; ++i) cin >> a[i];
-    for(i = 0; i < n; ++i) cin >> b[i];
-
-    cout << "HERE\n";
-
-    // CALCULATE MIN VALUE FROM THE RIGHT
-    // FOR I = N
-    //    SEARCH FOR MINVAL[I] POSITIONS FROM THE RIGHT
-    //      IF A[I] AND B[I] IS ALREADY IN MIN STATE, CONTINUE
-    //      IF MATCH FOR BOTH A AND B, THEN SWAP (<-- MAKE MOVE)
-    //      IF NOT FOUND, IMPOSSIBLE
-
-    vector <int> minPosA, minPosB;
-    int minA, minB;
-
-    
-    for(i = 0; i < n - 1; ++i)
+    while(TC--)
     {
-      minA = minB = INF;
+        cin >> n;
 
-      for(j = n - 1; j >= i; --j)
-      {
-        if(a[j] == minA) minPosA.push_back(j);
-        else if(a[j] < minA) { minA = a[j]; minPosA.clear(); minPosA.push_back(j); }
+        memset(pos, 0, (n+1)*sizeof(int));
 
-        if(b[j] == minB) minPosB.push_back(j);
-        else if(b[j] < minB) { minB = b[j]; minPosB.clear(); minPosB.push_back(j); }
-      }
+        for(i = 1; i <= n; ++i)
+        {
+            cin >> a[i];
+            sortedA[i] = a[i];
+            setBit(&pos[a[i]], i);
+        }
 
-      // CODE HERE      
+        for(i = 1; i <= n; ++i)
+        {
+            cin >> b[i];
+            sortedB[i] = b[i];
+            setBit(&pos[b[i]], i);
+        }
+
+        // SORTING
+        sort(sortedA, sortedA+n+1);
+        sort(sortedB, sortedAB+n+1);
+
+        // MAIN OPERATION
+        impossible = false;
+        for(i = 1; i <= n; ++i)
+        {
+            //
+        }
+
+        // cout << "positions:\n";
+        // for(i = 1; i <= n; ++i)
+        // {
+        //     cout << i << ": ";
+        //     for(int j = 1; j <= n; ++j)
+        //     {
+        //         if(checkBit(pos[i], j)) cout << j << ' ';
+        //     }
+        //     cout << '\n';
+        // }
     }
-  }
 
-  return 0;
+    return 0;
 }
