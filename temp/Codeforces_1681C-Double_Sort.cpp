@@ -1,10 +1,3 @@
-/**
- * Educational Codeforces Round 129 (Rated for Div. 2)
- * Problem C - Double Sort
- * URL: https://codeforces.com/problemset/problem/1681/C
- * AUTHOR: Astik Roy
-**/
-
 #include <iostream>
 #include <cstring>
 #include <bitset>
@@ -22,6 +15,8 @@ bool checkBit(int n, int pos)
 }
 
 void setBit(int * n, int pos) { *n |= (1 << pos); }
+
+void unsetBit(int * n, int pos) { *n ^= (1 << pos); }
 
 void printPosition(int ara[], int n)
 {
@@ -47,14 +42,55 @@ void swap(int * a, int * b)
     return;
 }
 
+void printAB(int a[], int b[], int n)
+{
+	cout << "Array A, B\n";
+                        for(int k = 1; k <= n; ++k)
+                        cout << a[k] << ' ';
+                        cout << '\n';
+                        for(int k = 1; k <= n; ++k)
+                        cout << b[k] << ' ';
+                        cout << '\n';
+}
+
+void printPositions(int posA[], int posB[], int n)
+{
+	int i, j;
+	
+	cout << "Positions of A:\n";
+	for(i = 1; i <= n; ++i)
+	{
+		cout << i << ": ";
+		for(j = 1; j <= n; ++j)
+			if(checkBit(posA[i], j))
+				cout << j << ' ';
+			cout << '\n';
+	}
+	
+	cout << "Positions of B:\n";
+	for(i = 1; i <= n; ++i)
+	{
+		cout << i << ": ";
+		for(j = 1; j <= n; ++j)
+			if(checkBit(posB[i], j))
+				cout << j << " ";
+			cout << '\n';
+	}
+
+	return;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     int a[LIM], sortedA[LIM], b[LIM], sortedB[LIM], TC, n, i, j, posA[LIM], posB[LIM];
     bool impossible;
     vector <pair <int, int> > swaps;
+
+    a[0] = b[0] = sortedA[0] = sortedB[0] = 0;
+    // int k = 0;
 
     cin >> TC;
 
@@ -81,59 +117,61 @@ int main()
 
         // SORTING
         sort(sortedA, sortedA+n+1);
-        sort(sortedB, sortedAB+n+1);
+        sort(sortedB, sortedB+n+1);
 
         // MAIN OPERATION
         impossible = false;
+        
+        // printPositions(posA, posB, n);
 
         for(i = 1; i <= n - 1; ++i)
         {
-            if(a[i] == sortedA[i])
-            {
-                if(b[i] == sortedB[i])
-                    continue;
-                else
-                {
-                    // check other positions of a[i] that match with any position of sortedB[i]
-                    for(j = i + 1; j <= n; ++j)
-                    {
-                        if(checkBit(posA[a[i]], j) && checkBit(posB[sortedB[i]], j))
-                        {
-                            // update positions
-                            // swapping
-                            swap(&a[i], &a[j]);
-                            swap(&b[i], &b[j]);
-                            // updating answers
-                            swaps.push_back(i, j);
-                            break;
-                        }
-                    }
-
-                    if(j > n)
-                    {
-                        // not found
-                        impossible = true;
-                        break;
-                    }
-                }
-            }
+            if(a[i] == sortedA[i] && b[i] == sortedB[i])
+                continue;
             else
             {
+                // cout << "Mismatch: " << i << '\n';
+                // check other positions of sortedA[i] that match with any position of sortedB[i]
                 for(j = i + 1; j <= n; ++j)
                 {
-                    if(checkBit(posA[a[i]], j) && checkBit(posB[sortedB[i]], j))
+                    if(checkBit(posA[sortedA[i]], j) && checkBit(posB[sortedB[i]], j))
                     {
+                       // cout << "For " << i << " found " << j << '\n';
+                        
                         // update positions
+                        unsetBit(&posA[a[i]], i);
+                        unsetBit(&posA[a[j]], j);
+                        
+                        setBit(&posA[a[i]], j);
+                        setBit(&posA[a[j]], i);
+                        
+                        unsetBit(&posB[b[i]], i);
+                        unsetBit(&posB[b[j]], j);
+                        
+                        setBit(&posB[b[i]], j);
+                        setBit(&posB[b[j]], i);
+                        
+                        // printPositions(posA, posB, n);
+
                         // swapping
                         swap(&a[i], &a[j]);
                         swap(&b[i], &b[j]);
+                        
+                        // printAB(a, b, n);                        
+                        // printPositions(posA, posB, n);                        
+
                         // updating answers
-                        swaps.push_back(i, j);
+                        swaps.push_back(make_pair(i, j));
                         break;
                     }
                 }
-                // if b is sorted
-                // if not sorted
+
+                if(j > n) // not found
+                {
+                    //cout << "Impossible for " << i << '\n';
+                    impossible = true;
+                    break;
+                }
             }
         }
 
@@ -143,12 +181,9 @@ int main()
             cout << swaps.size() << '\n';
             for(i = 0; i < swaps.size(); ++i)
                 cout << swaps[i].first << ' ' << swaps[i].second << '\n';
-            swaps.clear();
         }
+        swaps.clear();
     }
-
-    return 0;
-}
 
     return 0;
 }
