@@ -1,14 +1,14 @@
 /**
- *
- * Problem
- * Time:
+ * Codeforces Round #702 (Div. 3)
+ * Problem D - Permutation Transformation
+ * Time: 15 ms
  * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
 #include <cstring>
 
-#define LIM 100
+#define LIM 101
 
 using namespace std;
 
@@ -26,8 +26,8 @@ void solve(int b, int e, int level)
     if(mx) {
         vis[mx_pos] = true;
         dep[mx_pos] = level;
-        solve(0, mx_pos-1, level+1);
-        solve(mx_pos+1, n, level+1);
+        solve(b, mx_pos-1, level+1);
+        solve(mx_pos+1, e, level+1);
     }
 
     return;
@@ -36,7 +36,7 @@ void solve(int b, int e, int level)
 int main()
 {
     ios_base::sync_with_stdio(0);
-    //cin.tie(NULL);
+    cin.tie(NULL);
 
     int TC;
     register int i;
@@ -44,10 +44,13 @@ int main()
     cin >> TC;
 
     while(TC--) {
+        
         cin >> n;
-        --n;
 
-        memset(vis, 0, n*sizeof(bool));
+        for(i = 0; i < n; ++i) cin >> ara[i];
+        memset(vis, 0, (n+1)*sizeof(bool));
+
+        --n;
 
         solve(0, n, 0);
 
