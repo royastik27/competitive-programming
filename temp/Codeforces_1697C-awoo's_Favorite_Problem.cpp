@@ -5,13 +5,6 @@
 * AUTHOR: Astik Roy
 **/
 
-/**
-* Educational Codeforces Round 130 (Rated for Div. 2)
-* Problem C - awoo's Favorite Problem
-* Time: 
-* AUTHOR: Astik Roy
-**/
-
 #include <iostream>
 #include <algorithm>
 
