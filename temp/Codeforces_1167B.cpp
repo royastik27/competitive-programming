@@ -12,7 +12,7 @@ int main()
 {
     ios_base::sync_with_stdio(false);
 
-    // CODE HERE
+    cout << "HELLO I AM\n";
 
     return 0;
 }
