@@ -1,25 +1,14 @@
 #include <iostream>
-#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-void CHANGE(vector <int> vec)
-{
-    vec[0] = 10;
-    vec[1] = 0;
-
-    return;
-}
-
 int main()
 {
-    vector <int> vec = { 1, 2, 3, 4 };
+    int ara[] = { 10, 20, 30, 40, 50 };
+    int n = sizeof(ara) / sizeof(ara[0]);
 
-    CHANGE(vec);
-
-    for(int i = 0; i < vec.size(); ++i)
-        cout << vec[i] << ' ';
-    cout << '\n';
+    cout << *upper_bound(ara, ara+n, 20) << '\n';
 
     return 0;
 }
