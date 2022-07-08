@@ -1,7 +1,7 @@
 /**
- * Codeforces Round #613 (Div. 2)
- * Problem B - Just Eat It!
- * Time: 46 ms
+ * Good Bye 2020
+ * Problem 1466C - Canine poetry
+ * Time: 15 ms
  * AUTHOR: Astik Roy
 **/
 
