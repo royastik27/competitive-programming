@@ -1,7 +1,7 @@
 /**
- * Codeforces Round #613 (Div. 2)
- * Problem B - Just Eat It!
- * Time: 46 ms
+ * Codeforces Round #672 (Div. 2)
+ * Problem C1 - Pokémon Army (easy version)
+ * Time: 78 ms
  * AUTHOR: Astik Roy
 **/
 
@@ -9,26 +9,39 @@
 
 using namespace std;
 
+#define LIM 300001
+
 class Solution
 {
+    int arr[LIM];
+
     public:
-    int solve()
+    long long int solve()
     {
-        string str;
-        int len, i, cnt = 0;
+        long long int ans = 0;
+        int n, nQueries, i, add, mn;
 
-        cin >> str;
-        len = str.length();
+        cin >> n >> nQueries;
 
-        if(len > 1 && str[1] == str[0]) { str[1] = '*'; ++cnt; }
+        for(i = 0; i < n; ++i) cin >> arr[i];
 
-        for(i = 2; i < len; ++i)
+        mn = 0; add = arr[0];
+
+        for(i = 1; i < n; ++i)
         {
-            if(str[i] == str[i-1] || str[i] == str[i-2])
-                { str[i] = '*'; ++cnt; }
+            if(arr[i] < arr[i-1])
+            {
+                ans += add;
+                mn = arr[i];
+                add = 0;
+            }
+            else
+                add = arr[i] - mn;
         }
+
+        ans += add;
         
-        return cnt;
+        return ans;
     }
 };
 
