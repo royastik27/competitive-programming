@@ -1,40 +1,33 @@
 /**
- * Codeforces Round #780 (Div. 3)
- * Problem C - Get an Even String
- * Time: 46 ms
+ * Codeforces Round #565 (Div. 3)
+ * Problem C -  Lose it!
+ * Time: 109 ms
  * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
-#include <set>
 
 using namespace std;
 
 class Solution
 {
-    public:
+public:
     int solve()
     {
-        int ans = 0, i;
-        string str;
-        set <char> s;
-        pair < set <char>::iterator, bool > check;
+        int ans = 15, n, num, cnt;
 
-        cin >> str;
-
-        int len = str.length();
-        for(i = 0; i < len; ++i)
+        cin >> n;
+        
+        for(int i = 0; i < 15; ++i)
         {
-            check = s.insert(str[i]);
-            if(!check.second)
-            {
-                ans += s.size() - 1;
-                s.clear();
-            }
+            num = n + i;
+            cnt = 0;
+
+            while(num % 2 == 0) { ++cnt; num /= 2; }
+
+            ans = min(i + 15-cnt, ans);
         }
 
-        ans += s.size();
-        
         return ans;
     }
 };
@@ -47,7 +40,6 @@ int main()
     Solution sol;
 
     int TC;
-
     cin >> TC;
 
     while(TC--)

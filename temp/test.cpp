@@ -5,23 +5,11 @@ using namespace std;
 
 int main()
 {
-    set <int> s;
-    pair < set <int>::iterator, bool > check;
+    int arr[5] = {};
 
-    s.insert(10);
-
-    check = s.insert(20);
-
-    for(auto it = s.begin(); it != s.end(); ++it)
-        cout << *it << ' ';
+    for(int i = 0; i < 5; ++i)
+        cout << arr[i] << ' ';
     cout << '\n';
-
-    s.clear();
-
-    cout << "AFTER CLEARING\n";
-    for(auto it = s.begin(); it != s.end(); ++it)
-        cout << *it << ' ';
-    cout << "\n";
 
     return 0;
 }
