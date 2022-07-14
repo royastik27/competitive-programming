@@ -1,6 +1,7 @@
 /**
  * Codeforces Round #694 (Div. 1)
  * Problem A - Strange Birthday Party
+ * Number 10th Solution of Codeforces with C++ 14 (Sorting by time in ascending order)
  * Time: 155 ms
  * AUTHOR: Astik Roy
 **/
