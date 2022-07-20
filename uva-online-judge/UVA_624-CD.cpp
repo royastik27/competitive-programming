@@ -1,5 +1,6 @@
 /**
  * UVA 624 - CD
+ * DP Solution of Backtracking Problem
  * RANK: 1669 out of 20005
  * AUTHOR: Astik Roy
 **/
@@ -49,7 +50,6 @@ public:
 
                 else if(dp[j - track[i].first] && dp[j - track[i].first] != i+1)
                     dp[j] = i + 1;
-                    // dp[j] = track[i];
             }
 
             // cout << "For " << track[i].first << "\n";
