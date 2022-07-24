@@ -1,7 +1,7 @@
 /**
  * UVA 481 - What Goes Up
  * Implemented LIS without learning the algo
- * RANK: 1130 out of 9302
+ * RANK: 1131 out of 9302
  * TIME: 0.010 sec
  * AUTHOR: Astik Roy
 **/
@@ -45,12 +45,7 @@ public:
         }
 
         // GETTING RESULT
-        for(i = sz; i >= 0; --i)
-            if(idx[i])
-            {
-                el = idx[i];
-                break;
-            }
+        el = idx[lis.size()];
 
         lis.clear();
         while(el != -1)
