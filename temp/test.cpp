@@ -1,40 +1,19 @@
 #include <iostream>
-#include <set>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-class Test
-{
-    int tata[10];
-
-    void printMoga()
-    {
-        cout << "Moga: ";
-        cout << tata[0] << '\n';
-        return;
-    }
-
-    public:
-    Test()
-    {
-        tata[0] = 27;
-    }
-    void printTata()
-    {
-        cout << "tata: " << tata[0] << '\n';
-        printMoga();
-        return;
-    }
-};
-
 int main()
 {
-    int arr[5] = {};
+    vector <int> vec;
 
-    Test tok;
+    auto it = lower_bound(vec.begin(), vec.end(), 5);
 
-    tok.printTata();
-    tok.printTata();
+    if(it == vec.end())
+        cout << "LAST\n";
+    else
+    cout << (it - vec.begin()) << '\n';    
 
     return 0;
 }
