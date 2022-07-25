@@ -6,14 +6,16 @@ using namespace std;
 
 int main()
 {
-    vector <int> vec;
+    
+    vector <int> vec = { 2, 3, 4 };
 
-    auto it = lower_bound(vec.begin(), vec.end(), 5);
+    vector <int> vec2 = { 5, 6, 7 };
 
-    if(it == vec.end())
-        cout << "LAST\n";
-    else
-    cout << (it - vec.begin()) << '\n';    
+    vec = vec2;
+
+    for(auto it = vec.begin(); it != vec.end(); ++it)
+        cout << *it << ' ';
+    cout << '\n';
 
     return 0;
 }
