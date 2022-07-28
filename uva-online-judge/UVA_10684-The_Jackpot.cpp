@@ -1,7 +1,7 @@
 /**
- * UVA 574 - Sum It Up
- * RANK: 2674 out of 9371
- * TIME: 0.000 sec
+ * UVA 10684 - The jackpot
+ * RANK: 1481 out of 16443
+ * TIME: 0.030 sec
  * AUTHOR: Astik Roy
 **/
 
@@ -13,7 +13,7 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
+
     int n, sum, max, el, i;
 
     while(cin >> n && n)
