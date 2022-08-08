@@ -16,45 +16,52 @@ using namespace std;
 #define BLACK 1
 
 class Solution {
-    int n;
+    int n, ans[LIM];
     vector <int> adj[LIM];
     bitset <LIM> visited, tempVisited, color;
 
-    int go(int node, int parentColor)
+    int go(int node, int parent, int parentColor)
     {
         // FOR CYCLES
-        if(tempVisited[node])
-        {
-            if(color[node] == parentColor && parentColor == BLACK)
-                return -LIM;
-            else return 0;
-        }
+        // if(tempVisited[node])
+        // {
+        //     if(color[node] == parentColor && parentColor == BLACK)
+        //         return -LIM;
+        //     else return 0;
+        // }
 
         tempVisited[node] = true;
 
-        cout << "Called " << node << " with " << parentColor << '\n';
+        cout << "Called " << node << " with " << (parentColor ? "BLACK" : "WHITE") << '\n';
 
         // RECURSIVE CALLS
         int white = 0, black = (parentColor == WHITE) ? 1 : 0;
 
         int sz = adj[node].size(), curr;
 
-        for(int i = 0; i < sz; ++i)
+        for(int i = 0; i < sz; ++i) // check for going to parent
         {
             curr = adj[node][i];
 
-            white += go(curr, WHITE);
+            if(curr == parent) continue;
 
-            if(parentColor == WHITE) black += go(curr, BLACK);
+            white += go(curr, node, WHITE);
+
+            if(parentColor == WHITE) black += go(curr, node, BLACK);
         }
 
         if(black > white)
         {
             color[node] = BLACK;
-            cout << "Color of " << node << " is black\n";
+             cout << "Color of " << node << " is black\n";
             return black;
         }
-        else { color[node] = WHITE; cout << "Color of " << node << " is white\n"; return white; }
+        else
+        {
+            color[node] = WHITE;
+            cout << "Color of " << node << " is white\n";
+            return white;
+        }
     }
 public:
     void solve()
@@ -71,9 +78,15 @@ public:
             adj[j].push_back(i);
         }
 
+        memset(ans, 0, (n+1) * sizeof(int));
+
         // CALLING FUNCTION
         for(i = 1; i <= n; ++i)
-            if(!visited[i]) { tempVisited = visited; go(i, WHITE); visited = tempVisited; }
+            if(!visited[i]) {
+                tempVisited = visited;
+                go(i, 0, WHITE);
+                visited = tempVisited;
+            }
 
         // PRINTING RESULT
         cout << color.count() << '\n';
