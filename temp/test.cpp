@@ -1,32 +1,70 @@
+/**
+ * Codeforces Round #640 (Div. 4)
+ * Problem D - Alice, Bob and Candies
+ * TIME: 46 ms
+ * AUTHOR: Astik Roy
+**/
+
 #include <iostream>
 
 using namespace std;
 
-// bool isPalindrome()
-// {
-//     int i = 0, j = len - 1;
+#define LIM 200001
 
-//     while(i < j)
-//     {
-//         if(!str[i]) ++i;
-//         else if(!str[j]) --j;
-//         else if(str[i] != str[j]) return false;
-//         else { ++i, --j; }
-//     }
+class Solution {
 
-//     return true;
-// }
+public:
+    int solve()
+    {
+        int ans = 0, n, k, i;
+        string str;
+
+        cin >> n >> k >> str;
+
+        int cnt = 0;
+        for(i = 0; i < n; ++i)
+        {
+            if(str[i] == '1') break;
+
+            ++cnt;
+        }
+
+        if(i < n)
+            ans += cnt / (k + 1);
+        else ans += cnt / k; // for all zero
+
+        cnt = 0;
+
+        for(; i < n; ++i)
+        {
+            if(str[i] == '1')
+            {
+                if(cnt)
+                    ans += (cnt - k) / (k + 1);
+
+                cnt = 0;
+            }
+            else ++cnt;
+        }
+
+        ans += cnt / (k + 1);
+
+        return ans; 
+    }
+};
 
 int main()
 {
-    string str = "Astik";
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    cout << str << '\n';
-    cout << str.length() << '\n';
+    Solution sol;
+    int TC;
+    
+    cin >> TC;
 
-    str[1] = 0;
-    cout << str << '\n';
-    cout << str.length() << '\n';
-
+    while(TC--)
+        cout << sol.solve() << '\n';
+    
     return 0;
 }
