@@ -1,7 +1,7 @@
 /**
- * Codeforces Round #640 (Div. 4)
- * Problem D - Alice, Bob and Candies
- * TIME: 46 ms
+ * Codeforces Round #650 (Div. 3)
+ * Problem C - Social Distance
+ * TIME: 15 ms
  * AUTHOR: Astik Roy
 **/
 
@@ -29,12 +29,11 @@ public:
             ++cnt;
         }
 
-        if(i < n)
-            ans += cnt / (k + 1);
-        else ans += cnt / k; // for all zero
+        if(cnt == n) 
+            ans = 1 + (cnt-1) / (k+1); // for all zero
+        else ans += cnt / (k + 1);
 
         cnt = 0;
-
         for(; i < n; ++i)
         {
             if(str[i] == '1')
@@ -61,12 +60,10 @@ int main()
     Solution sol;
     int TC;
     
-    // cin >> TC;
+    cin >> TC;
 
-    // while(TC--)
-    //     cout << sol.solve() << '\n';
-
-    cout << (-5 / 10) << '\n';
+    while(TC--)
+        cout << sol.solve() << '\n';
     
     return 0;
 }
