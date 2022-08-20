@@ -1,7 +1,6 @@
 /**
- * Codeforces Round #303 (Div. 2)
- * Problem D - Queue
- * TIME: 46 ms
+ * CSES 1193 - Labyrinth
+ * TIME: 0.07 s
  * AUTHOR: Astik Roy
 **/
 
