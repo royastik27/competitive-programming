@@ -5,114 +5,84 @@
 **/
 
 #include <iostream>
-#include <cstring>
 #include <vector>
-#include <queue>
 #include <utility>
 
 using namespace std;
 
-#define LIM 20
-#define INF 400
-
-int r_move[4] = { 0, 0, -1, 1 }, c_move[4] = { -1, 1, 0, 0 };
+#define LIM 50
 
 class Solution {
-    int row, col, x, y, dis[LIM][LIM];
     char grid[LIM][LIM];
 
-    void go(int i, int j)
+    vector < pair<int, int> > first;
+    vector < pair<int, int> > second;
+
+    Solution()
     {
-        queue <pair <int, int> > que;
-        pair <int, int> curr, node;
-        int k;
+        first.push_back(make_pair(0, 1));
+        first.push_back(make_pair(0, 1));
+        first.push_back(make_pair(1, 0));
+        first.push_back(make_pair(1, 0));
 
-        que.push(make_pair(i, j));
-
-        while(!que.empty())
-        {
-            curr = que.front();
-            que.pop();
-
-            for(k = 0; k < 4; ++k)
-            {
-                node.first = curr.first + r_move[k];
-                node.second = curr.second + c_move[k];
-
-                if(node.first < 0 || node.first == row || node.second < 0 || node.second == col || grid[node.first][node.second] == '#' || dis[node.first][node.second] <= dis[curr.first][curr.second] + 1)
-                    continue;
-
-                dis[node.first][node.second] = dis[curr.first][curr.second] + 1;
-
-                if(node.first == x && node.second == y) return;
-
-                que.push(make_pair(node.first, node.second));
-            }
-        }
-
-        return;
-    }
-
-    void readyDis()
-    {
-        int i, j;
-        for(i = 0; i < row; ++i)
-            for(j = 0; j < col; ++j)
-                dis[i][j] = INF;
-
-        return;
+        second.push_back(make_pair(1, 1));
+        second.push_back(make_pair(1, 0));
+        second.push_back(make_pair(1, 1));
+        second.push_back(make_pair(-1, -1));
     }
 public:
-    int solve()
+    bool solve()
     {
+        int row, col, i, j, k, x1, y1, x2, y2;
+
         cin >> row >> col;
 
-        int i, j;
-        char ch;
-        vector <pair <int, int> > girl;
+        for(i = 0; i < row; ++i)
+            for(j = 0; j < col; ++j)
+                cin >> grid[i][j];
 
+        // PROCESSING
         for(i = 0; i < row; ++i)
         {
             for(j = 0; j < col; ++j)
             {
-                cin >> ch;
-                if(ch == 'm') ch = '#';
+                if(grid[i][j] == '*')
+                {
+                    for(k = 0; k < 4; ++k)
+                    {
+                        x1 = i + first[k].first;
+                        y1 = j + first[k].second;
 
-                if(ch == 'h')
-                    { x = i; y = j; }
-                else if(ch >= 'a')
-                    girl.push_back(make_pair(i, j));
-
-                grid[i][j] = ch;
+                        x2 = i + second[k].first;
+                        y2 = j + second[k].second;
+                    }
+                }
             }
         }
 
-        int ans = 0;
-        for(i = 0; i < 3; ++i)
-        {
-            readyDis();
-            dis[girl[i].first][girl[i].second] = 0;
 
-            go(girl[i].first, girl[i].second);
-            ans = max(dis[x][y], ans);
-        }
-
-        return ans;
+        // PRINTING RESULT
+        for(i = 0; i < row; ++i)
+            for(j = 0; j < col; ++j)
+                if(grid[i][j] == '*') return false;
+        
+        return true;
     }
 };
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
 
-    int TC, k = 0;
+    int TC;
     cin >> TC;
-
+    
     while(TC--)
-        cout << "Case " << ++k << ": " << sol.solve() << '\n';
+        if(sol.solve()) cout << "YES\n";
+        else cout << "NO\n";
     
     return 0;
 }
