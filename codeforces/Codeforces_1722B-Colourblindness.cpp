@@ -1,31 +1,35 @@
 /**
  * Codeforces Round #817 (Div. 4)
- * Problem A - Spell Check
- * TIME: 0 ms
+ * Problem B - Colourblindness
+ * TIME: 15 ms
  * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 class Solution {
-    string name = "Timur";
+
 public:
-    Solution()
-    {
-        sort(name.begin(), name.end());
-    }
     bool solve()
     {
-        int n;
+        int n, i;
         string str;
+        char ch;
 
         cin >> n >> str;
-        sort(str.begin(), str.end());
 
-        return (str == name);
+        int cnt = n;
+        for(i = 0; i < n; ++i)
+        {
+            cin >> ch;
+
+            if(ch == 'R' && str[i] != 'R') --cnt;
+            else if(ch != 'R' && str[i] == 'R') --cnt;
+        }
+
+        return (cnt == n);
     }
 };
 
