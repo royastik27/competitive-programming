@@ -1,88 +1,136 @@
 /**
- * LightOJ 1238 - Power Puff Girls
- * TIME: 4 ms
+ * Codeforces Round #817 (Div. 4)
+ * Problem A - Spell Check
+ * TIME: 0 ms
  * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
 #include <cstring>
-#include <vector>
+#include <map>
 
 using namespace std;
 
-#define LIM 100001
+typedef long long int ll;
+
+#define MOD 998244353
+#define CLUB_LIM 1000
 
 class Solution {
-    vector <int> adj[LIM], ans;
-    bool change[LIM];
+    map < pair <int, int>, int> mp;
+    map < pair <int, int>, int>::iterator it, prev;
 
-    void go(int node)
+    int par[CLUB_LIM];
+
+    int Find(int x)
     {
-        int i, sz = adj[node].size(), prop = 0, child;
+        if(par[x] < 0) return x;
 
-        for(i = 0; i < sz; ++i)
+        return Find(par[x]);
+    }
+
+    void Union(int x, int y)
+    {
+        int parX = Find(x), parY = Find(y);
+
+        if(parX == parY) return;
+
+        if(par[parX] < par[parY]) // x is more weighted
         {
-            child = adj[node][i];
-            go(child);
-
-            if(change[child]) prop 
+            par[parX] += par[parY];
+            par[parY] = parX;
         }
-
+        else
+        {
+            par[parY] += par[parX];
+            par[parX] = parY;
+        }
 
         return;
     }
-public:
-    void solve()
+
+    int Power(int base, int p)
     {
-        int n, i, deg[LIM], start;
-        vector <bool> cn;
+        if(p == 0) return 1;
 
-        cin >> n;
-        memset(change, 0, n+1);
-        memset(deg, 0, (n+1)*sizeof(int));
+        if(p & 1)
+            return (ll) base * Power(base, p-1) % MOD;
 
-        start = 0;
-        for(i = 1; i < n; ++i)
+        base = (ll) base * base % MOD;
+
+        return Power(base, p / 2);
+    }
+public:
+    int solve()
+    {
+        int nClubs, nStudents, nShirts, i, x, left, right;
+        ll sum = 0;
+
+        cin >> nClubs >> nStudents >> nShirts;
+
+        for(i = 0; i < nClubs; ++i)
         {
-            cin >> i >> j;
-            adj[j].push_back(i);
+            cin >> x;
 
-            ++deg[i];
-            if(!deg[i]) start= i;
+            while(x--)
+            {
+                cin >> left >> right;
+                mp[{left, right}] = i;
+                sum += right - left + 1;
+            }
         }
 
-        for(i = 0; i < n; ++i)
+        // PROCESSING
+        memset(par, -1, nClubs * sizeof(int));
+
+        while(mp.size() > 1)
         {
-            cin >> i;
-            cn.push_back(i);
+            // INITIALIZATION
+            prev = it = mp.begin();
+            ++it;
+
+            if(it->first.first <= prev->first.second)
+            {
+                Union(prev->second, it->second);
+
+                if(it->first.second <= prev->first.second)
+                {
+                    sum -= it->first.second - it->first.first + 1;
+                    mp.erase(it);
+                }
+                else
+                {
+                    sum -= prev->first.second - it->first.first + 1;
+                    mp.insert({ {prev->first.first, it->first.second}, prev->second });
+                    mp.erase(prev);
+                    mp.erase(it);
+                }
+            }
+            else mp.erase(prev);
         }
 
-        for(i = 0; i < n; ++i)
-        {
-            cin >> i;
-            if(i != cn[i]) change[i+1] = true;
-        }
+        int cnt = 0;
+        for(i = 0; i < nClubs; ++i)
+            if(par[i] < 0) ++cnt;
 
-        go(start);
+        mp.clear();
 
-        int sz = ans.size();
-        cout << sz << '\n';
-        for(i = 0; i < sz; ++i)
-            cout << ans[i] << ' ';
-        cout << '\n';
-
-        return;
+        return Power(nShirts, cnt + nStudents - sum);
     }
 };
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
 
-    sol.solve();
+    int TC;
+    cin >> TC;
+    
+    while(TC--)
+        cout << sol.solve() << '\n';
     
     return 0;
 }
