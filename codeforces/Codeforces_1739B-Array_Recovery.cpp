@@ -6,36 +6,37 @@
 **/
 
 #include <iostream>
-#include <vector>
-#include <map>
-#include <utility>
 
 using namespace std;
 
-#define LIM 2000
+#define LIM 100
 
 class Solution {
     int arr[LIM];
-    map <vector <pair <int, int> > > mp;
 public:
     void solve()
     {
-        int n, i, j, sum;
+        int i, n;
+        bool isPossible;
 
         cin >> n;
+
         for(i = 0; i < n; ++i) cin >> arr[i];
 
+        --n;
+        isPossible = true;
         for(i = 0; i < n; ++i)
-        {
-            sum = 0;
-            for(j = i; j < n; ++j)
-            {
-                sum += arr[j];
-                mp[sum].push_back({i+1, j+1});
-            }
-        }
+            if(arr[i] < arr[i+1] || arr[i+1] == 0)
+                arr[i+1] = arr[i]+arr[i+1];
+            else isPossible = false;
 
-        mp.clear();
+        if(isPossible)
+        {
+            ++n;
+            for(i = 0; i < n; ++i)
+                cout << arr[i] << ' ';
+            cout << '\n';
+        } else cout << "-1\n";  
         
         return;
     }
@@ -44,7 +45,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
