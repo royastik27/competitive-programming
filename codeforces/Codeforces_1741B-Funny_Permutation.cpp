@@ -1,7 +1,7 @@
 /**
  * Codeforces Round #826 (Div. 3)
- * Problem A - Compare T-Shirt Sizes
- * TIME: 15 ms
+ * Problem B - Funny Permutation
+ * TIME: 31 ms
  * AUTHOR: Astik Roy
 **/
 
@@ -9,14 +9,24 @@
  
 using namespace std;
  
-#define LIM 
- 
 class Solution {
     
 public:
     void solve()
     {
-        cout << "HELLO\n";
+        int n;
+ 
+        cin >> n;
+ 
+        if(n == 3) cout << -1 << '\n';
+        else
+        {
+            cout << n << ' ' << n - 1 << ' ';
+ 
+            n -= 2;
+            for(int i = 1; i <= n; ++i) cout << i << ' ';
+            cout << '\n';
+        }        
         
         return;
     }
@@ -25,7 +35,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
  
     Solution sol;
     int TC;
