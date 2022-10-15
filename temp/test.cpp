@@ -2,17 +2,34 @@
 
 int main()
 {
-    char name[20] = "Sohan";
+    int x, y;
 
-    int i = 0;
+    printf("Enter x and y: ");
+    scanf("%d %d", &x, &y);
 
-    while(name[i] != '\0')
+    printf("x / y:\n");
+    if(y == 0)
     {
-        printf("%d ", (int)name[i]);
-        i++;
+        printf("Quotient: Inf\n");
+        printf("Remainder: Undefined\n");
+    }
+    else
+    {
+        printf("Quotient: %d\n", x/y);
+        printf("Remainder: %d\n", x%y);
     }
 
-    printf("\n");
+    printf("y / x:\n");
+    if(x == 0)
+    {
+        printf("Quotient: Inf\n");
+        printf("Remainder: Undefined\n");
+    }
+    else
+    {
+        printf("Quotient: %d\n", y/x);
+        printf("Remainder: %d\n", y%x);
+    }    
 
     return 0;
 }
