@@ -20,8 +20,8 @@ class Solution {
 public:
     void solve()
     {
-        int n, k, i;
-        ll sum = 0, ans = 1;
+        int n, k, i, ans = 1;
+        ll sum = 0;
 
         cin >> n >> k;
 
@@ -50,7 +50,7 @@ public:
 
             --sz;
             for(i = 0; i < sz; ++i)
-                ans = ans * (mxpos[i+1]-mxpos[i]) % MOD;
+                ans = (ll)ans * (mxpos[i+1]-mxpos[i]) % MOD;
         }
 
         cout << sum << ' ' << ans << '\n';
