@@ -1,58 +1,99 @@
+/**
+ * Codeforces Round #728 (Div. 1)
+ * Problem A - Great Graphs
+ * TIME: 46 ms
+ * AUTHOR: Astik Roy
+**/
+
 #include <iostream>
 #include <cstring>
- 
+#include <vector>
+#include <climits>
+
 using namespace std;
- 
-#define LIM 300001
-int winner[LIM], tree[LIM*4], n, leftVal, rightVal, val;
- 
-void fight(int b, int e, int node = 1)
-{
-    // out of range and base case
-    if(b > rightVal || e < leftVal || tree[node]) return;
- 
-    // For leaf nodes
-    if(b == e)
+
+#define LIM 1001
+#define INF 
+
+class Solution {
+
+public:
+    int solve()
     {
-        if(b != val)
-            tree[node] = winner[b] = val;
- 
-        return;
+        int n, m, i, j, ans = 0, energy[LIM], mn, mn_pos, cnt, neigh;
+        bool adj[LIM][LIM];
+        memset(adj, 0, sizeof(adj));
+
+        cin >> n >> m;
+        for(i = 1; i <= n; ++i) cin >> energy[i];
+
+        vector <int> cost(n+1, 0);
+
+        while(m--)
+        {
+            cin >> i >> j;
+            adj[i][j] = adj[j][i] = true;
+            cost[i] += energy[j];
+            cost[j] += energy[i];
+        }
+
+        cout << "Cost:\n";
+        for(i = 1; i <= n; ++i)
+            cout << cost[i] << ' ';
+        cout << '\n';
+
+        cnt = 0;
+
+        while(cnt < n)
+        {
+            mn = INT_MAX;
+
+            for(i = 1; i <= n; ++i)
+            {
+                // find the minimum cost from non-visited ones
+                if(cost[i] != -1 && cost[i] < mn)
+                {
+                    mn = cost[i];
+                    mn_pos = i;
+                }
+            }
+
+            cout << "Found Min: " << mn_pos << '\n';
+
+            // code here
+            for(i = 1; i <= n; ++i)
+            {
+                if(adj[mn_pos][i])
+                {
+                    cost[i] -= energy[mn_pos];
+                    adj[i][mn_pos] = false;
+                }
+            }
+
+             cout << "Cost:\n";
+        for(i = 1; i <= n; ++i)
+            cout << cost[i] << ' ';
+        cout << '\n';
+            
+            ++cnt;
+            ans += mn;
+            cost[mn_pos] = -1;
+
+            cout << "ans: " << ans << '\n';
+        }
+
+        return ans;
     }
- 
-    // recursive calls
-    int mid = (b + e) / 2;
-    int leftNode = node * 2;
-    int rightNode = leftNode + 1;
- 
-    fight(b, mid, leftNode);
-    fight(mid+1, e, rightNode);
- 
-    if(tree[leftNode] == tree[rightNode]) tree[node] = tree[leftNode];
- 
-    return;
-}
- 
+};
+
 int main()
 {
     ios_base::sync_with_stdio(false);
-    
-    int nFights;
- 
-    cin >> n >> nFights;
- 
-    memset(winner, 0, (n+1)*sizeof(int));
-    memset(tree, 0, (n+1)*4*sizeof(int));
- 
-    while(nFights--)
-    {
-        cin >> leftVal >> rightVal >> val;
-        fight(1, n);
-    }
- 
-    for(int i = 1; i <= n; ++i)
-        cout << winner[i] << ' ';
-    cout << '\n';
- 
+    // cin.tie(NULL);
+
+    Solution sol;
+
+    cout << sol.solve() << '\n';
+
     return 0;
 }
