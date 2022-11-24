@@ -1,6 +1,6 @@
 /**
 * CodeChef JOGGING - Jogging
-* TIme: 0.03 sec
+* TIME: 0.03 sec
 * AUTHOR: Astik Roy
 **/
 
