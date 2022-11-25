@@ -6,7 +6,7 @@
 **/
 
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -15,13 +15,8 @@ class Solution{
 public:
     void solve()
     {
-        string str;
-        int i, len, mp[26] = {};
-
-        cin >> str;
-
-        len = str.length();
-        for(i = 0; i < len; ++i)
+        cout << to_string(12.234) << '\n';
+        
             
         
         
