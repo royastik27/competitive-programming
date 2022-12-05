@@ -6,50 +6,28 @@
 **/
 
 #include <iostream>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
 class Solution
 {
-    string comb[6] = { "RGB", "RBG", "GRB", "GBR", "BRG", "BGR" };
+
 public:
     void solve()
     {
-        int n, ans = 0, i, j, cnt, mn_pos;
-        string str;
+        map <int, int> s;
 
-        cin >> n >> str;
+        s.insert({ 1, 2 });
+        s.insert({ 1, 2 });
+        s.insert({ 2, 5 });
+        s.insert({ 1, 3 });
 
-        if(n == 2 && str[0] == str[1])
-        {
-            ++ans;
+        auto it = s.lower_bound(1);
 
-            str[1] = (str[0] == 'R') ? 'G' : 'R';
-        }
-        else if(n > 2)
-        {
-            ans = n;
-
-            for(i = 0; i < 6; ++i)
-            {
-                cnt = 0;
-
-                for(j = 0; j < n; ++j)
-                    if(str[j] != comb[i][j%3])
-                        ++cnt;
-
-                if(cnt < ans)
-                {
-                    ans = cnt;
-                    mn_pos = i;
-                }
-            }
-
-            for(i = 0; i < n; ++i)
-                str[i] = comb[mn_pos][i%3];
-        }
-
-        cout << ans << '\n' << str << '\n';
+        cout << it->first << ' ' << it->second << '\n';
+        
         
         return;
     }
