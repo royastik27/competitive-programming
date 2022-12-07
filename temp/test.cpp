@@ -6,7 +6,7 @@
 **/
 
 #include <iostream>
-#include <map>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -17,16 +17,13 @@ class Solution
 public:
     void solve()
     {
-        map <int, int> s;
+        int n;
+        cin >> n;
+        vector <int> vec(n);
 
-        s.insert({ 1, 2 });
-        s.insert({ 1, 2 });
-        s.insert({ 2, 5 });
-        s.insert({ 1, 3 });
-
-        auto it = s.lower_bound(1);
-
-        cout << it->first << ' ' << it->second << '\n';
+        for(int i = 0; i < vec.size(); ++i)
+            cout << vec[i] << ' ';
+        cout << '\n';
         
         
         return;
