@@ -1,6 +1,7 @@
 /**
  * Codeforces Round #535 (Div. 3)
  * Problem D - Diverse Garland
+ * Simpler than the editorial
  * TIME: 15 ms
  * AUTHOR: Astik Roy
 **/
