@@ -1,49 +1,132 @@
 /**
- * Codeforces Round #809 (Div. 2)
- * Problem C - Qpwoeirut And The City
+ * Educational Codeforces Round 79 (Rated for Div. 2)
+ * Problem C - Stack of Presents
  * TIME: 62 ms
  * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
- 
+#include <cstring>
+
 using namespace std;
 
-vector < pair <int, int> > item;
-int capacity;
+#define LIM 100000
 
-int knapsack()
+typedef long long int ll;
+
+class Solution
 {
-    int n = item.size(), i, j;
-
-    sort(item.begin(), item.end());
-
-    vector < vector <int> > dp(n+1, vector <int> (capacity+1, 0));
-
-    for(i = 1; i <= n; ++i)
+    int n, m, a[LIM], b_i, i, j;
+    ll ans;
+    bool vis[LIM + 1];
+public:
+    ll solve()
     {
-        for(j = item[i-1].first; j <= capacity; ++j)
-            dp[i][j] = max(dp[i-1][j], item[i-1].second + dp[i-1][j - item[i-1].first]);
-    }
+        cin >> n >> m;
 
-    return dp[n][capacity];    
-}
- 
+        for(i = 0; i < n; ++i) cin >> a[i];
+
+        memset(vis, 0, n+1);
+        ans = 0;
+
+        for(i = 0, j = 0; j < m; ++j)
+        {
+            cin >> b_i;
+
+            if(!vis[b_i])
+            {
+                while(a[i] != b_i)
+                {
+                    vis[a[i]] = true;
+                    ++i;
+                }
+
+                ans += 2 * (i - j);
+                ++i;
+            }
+
+            ++ans;
+        }
+
+        return ans;
+    }
+};
+
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
-    item.push_back({ 2, 3 });
-    item.push_back({ 3, 5 });
-    item.push_back({ 2, 4 });
-    item.push_back({ 4, 3 });
+    Solution sol;
+    int TC;
 
-    capacity = 5;
- 
-    cout << knapsack() << '\n';
- 
+    cin >> TC;
+
+    while(TC--)
+        cout << sol.solve() << '\n';
+
+    return 0;
+}
+
+/**
+ * Educational Codeforces Round 79 (Rated for Div. 2)
+ * Problem C - Stack of Presents
+ * TIME: 62 ms
+ * AUTHOR: Astik Roy
+**/
+
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+#define LIM 100000
+#define MOD 1000000007
+
+class Solution
+{
+    int a[LIM], b[LIM], n, x, ans, i;
+    bool vis[LIM+1];
+public:
+    int solve()
+    {
+        cin >> n;
+        
+        memset(vis, 0, n+1);
+
+        for(i = 0; i < n; ++i)
+            cin >> a[i];
+        
+        for(i = 0; i < n; ++i)
+            cin >> b[i];
+
+        ans = 1;
+        for(i = 0; i < n; ++i)
+        {
+            cin >> x;
+            
+            if(!x & !vis[a[i]] & !vis[b[i]] & (a[i] != b[i]))
+                ans = ans * 2 % MOD;
+
+            vis[a[i]] = vis[b[i]] = true;
+        }
+
+        return ans;
+    }
+};
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    Solution sol;
+    int TC;
+
+    cin >> TC;
+
+    while(TC--)
+        cout << sol.solve() << '\n';
+
     return 0;
 }
