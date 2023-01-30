@@ -6,7 +6,6 @@
 **/
 
 #include <iostream>
-#include <set>
 
 using namespace std;
 
@@ -16,18 +15,6 @@ class Solution
 public:
     void solve()
     {
-        set <int> st;
-
-        st.insert(10);
-        st.insert(5);
-        st.insert(13);
-        st.insert(3);
-        st.insert(65);
-
-        for(auto it = st.begin(); it != st.end(); ++it)
-            st.erase(it);
-        cout << '\n';
-
         
 
         return;
