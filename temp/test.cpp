@@ -15,10 +15,7 @@ class Solution
 public:
     void solve()
     {
-        int n = 10;
 
-        while(--n--)
-            cout << "HEllo FUCK\n";
         
 
         return;
