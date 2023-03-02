@@ -6,6 +6,7 @@
 **/
 
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -13,62 +14,33 @@ typedef long long int ll;
 
 class Solution
 {
-    string str;
-
-    int get_num(int n)
-    {
-        int i, num = 0;
-
-        for(i = 0; i < n; ++i)
-        {
-            num = num * 10 + int(str[0]-'0');
-            str.erase(str.begin());
-        }
-
-        return num;
-    }
-
-    ll hash_time()
-    {
-        int day = get_num(2);
-        str.erase(str.begin());
-
-        int month = get_num(2);
-        str.erase(str.begin());
-
-        int year = get_num(4);
-        str.erase(str.begin());
-
-        int hour = get_num(2);
-        str.erase(str.begin());
-
-        int min = get_num(2);
-        str.erase(str.begin());
-
-        int sec = get_num(2);
-
-        ll ans = 0;
-
-        ans += year * 10000000000LL;
-        ans += month * 100000000LL;
-        ans += day * 1000000LL;
-        ans += hour * 10000LL;
-        ans += min * 100LL;
-        ans += sec * 1LL;
-
-        return ans;
-    }
-
+    int mx;
 public:
+    void fuck()
+    {
+        mx = 10;
+
+        return;
+    }
     void solve()
     {
+        priority_queue <int> que;
 
-        cin >> str;
+        que.push(10);
+        que.push(2);
+        que.push(5);
 
-        cout << "str: " << str << '\n';
+        cout << que.size()
+
+        // while(!que.empty())
+        // {
+        //     cout << que.top() << '\n';
+        //     que.pop();
+        // }
+
         
 
-        return;        
+        return;
     }
 };
 
