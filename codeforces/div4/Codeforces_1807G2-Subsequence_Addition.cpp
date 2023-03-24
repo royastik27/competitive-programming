@@ -1,6 +1,6 @@
 /**
 * Codeforces Round 859 (Div. 4)
-* Problem G1 - Subsequence Addition (Easy Version)
+* Problem G2 - Subsequence Addition (Hard Version)
 * TIME: 77 ms
 * AUTHOR: Astik Roy
 **/
@@ -14,7 +14,6 @@ using namespace std;
 typedef long long int ll;
 
 #define LIM 200000
-// #define LIM 200
 
 class Solution
 {
