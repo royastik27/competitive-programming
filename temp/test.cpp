@@ -29,7 +29,12 @@ int main()
     // cin.tie(NULL);
 
     Solution sol;
-    //
+    int TC;
+
+    cin >> TC;
+
+    while(TC--)
+        sol.solve();
 
     return 0;
 }

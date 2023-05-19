@@ -66,7 +66,7 @@ int main(int argc, char * argv[])
     else fileName = op;
 
     // EXECUTING THE FILE
-    system(strcat(fileName, ".exe"));
+    system(fileName);
 
     printEnd();
 

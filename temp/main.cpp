@@ -1,68 +1,94 @@
 /**
-* Codeforces Round 859 (Div. 4)
-* Problem G1 - Subsequence Addition (Easy Version)
-* TIME: 77 ms
+* [name]
+* Problem 
+* TIME: 
 * AUTHOR: Astik Roy
 **/
 
-
 #include <iostream>
-#include <algorithm>
+#include <vector>
 
 using namespace std;
 
 typedef long long int ll;
 
-#define LIM 200000
-// #define LIM 200
-
 class Solution
 {
-    int n, arr[LIM];
-    ll sum;
-public:
-    bool solve()
+    int n;
+    vector <int> vec, ans, temp;
+
+    bool compare()
     {
         int i;
+
+        for(i = 0; i < n; ++i)
+            if(temp[i] > ans[i])
+                return true;
+
+        return false;
+    }
+
+    void go(int b, int e)
+    {
+        int i;
+
+        for(i = e+1; i < n; ++i)
+            temp.push_back(vec[i]);
+
+        for(i = e; i >= b; --i)
+            temp.push_back(vec[i]);
+
+        for(i = 0 i < b; ++i)
+            temp.push_back(vec[i]);
+
+        if(compare())
+            for(i = 0; i < n; ++i)
+                ans[i] = temp[i];
+
+        temp.clear();
+
+        return;
+    }
+public:
+    void solve()
+    {
+        int num, i;
 
         cin >> n;
 
         for(i = 0; i < n; ++i)
-            cin >> arr[i];
-
-        sort(arr, arr+n);
-
-        // considering first element
-        if(arr[0] != 1)
-            return false;
-
-        // considering rests
-        sum = 1;
-
-        for(i = 1; i < n; ++i)
         {
-            if(arr[i] > sum)
-                return false;
-
-            sum += arr[i];
+            cin >> num;
+            vec.push_back(num);
+            ans.push_back(num);
         }
 
-        return true;
+        go(0, 0);
+
+        for(i = 0; i < n; ++i)
+        {
+            //
+        }
+
+        vec.clear();
+        ans.clear();
+
+        return;
     }
 };
 
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
     int TC;
-    
+
     cin >> TC;
 
     while(TC--)
-        cout << (sol.solve() ? "YES\n" : "NO\n");
+        sol.solve();
 
     return 0;
 }
