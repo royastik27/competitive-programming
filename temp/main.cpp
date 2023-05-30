@@ -6,72 +6,72 @@
 **/
 
 #include <iostream>
-#include <vector>
+#include <algorithm>
+#include <cstring>
 
 using namespace std;
 
 typedef long long int ll;
 
+#define LIM 1000
+
 class Solution
 {
-    int n;
-    vector <int> vec, ans, temp;
-
-    bool compare()
-    {
-        int i;
-
-        for(i = 0; i < n; ++i)
-            if(temp[i] > ans[i])
-                return true;
-
-        return false;
-    }
-
-    void go(int b, int e)
-    {
-        int i;
-
-        for(i = e+1; i < n; ++i)
-            temp.push_back(vec[i]);
-
-        for(i = e; i >= b; --i)
-            temp.push_back(vec[i]);
-
-        for(i = 0 i < b; ++i)
-            temp.push_back(vec[i]);
-
-        if(compare())
-            for(i = 0; i < n; ++i)
-                ans[i] = temp[i];
-
-        temp.clear();
-
-        return;
-    }
+    int arr[LIM];
+    ll ans[LIM];
 public:
     void solve()
     {
-        int num, i;
+        int n, i, grp, cnt, j, idx;
+        ll sum;
 
         cin >> n;
 
         for(i = 0; i < n; ++i)
+            cin >> arr[i];
+
+        sort(arr, arr+n);
+
+        cin >> grp >> sum;
+
+        if(n % grp)
         {
-            cin >> num;
-            vec.push_back(num);
-            ans.push_back(num);
+            cout << "NO\n";
+            return;
         }
 
-        go(0, 0);
+        cnt = n / grp;
 
-        for(i = 0; i < n; ++i)
+        memset(ans, 0, sizeof(ans));
+        idx = -1;
+
+        bool front = true;
+        for(i = 0; i < cnt; ++i)
         {
-            //
+            if(front)
+            {
+                for(j = 0; j < grp; ++j)
+                    ans[j] += arr[++idx];
+            }
+            else
+            {
+                for(j = grp - 1; j >= 0; --j)
+                    ans[j] += arr[++idx];
+            }            
+
+            front ^= 1;       
         }
 
-        vec.clear();
-        ans.clear();
+        for(i = 1; i < grp; ++i)
+        {
+            if(ans[i] != ans[0])
+            {
+                cout << "NO\n";
+                return;
+            }
+        }
+
+        cout << "YES\n";
 
         return;
     }
@@ -83,12 +83,8 @@ int main()
     // cin.tie(NULL);
 
     Solution sol;
-    int TC;
-
-    cin >> TC;
-
-    while(TC--)
-        sol.solve();
+    
+    sol.solve();
 
     return 0;
 }
