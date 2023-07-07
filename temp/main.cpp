@@ -6,8 +6,6 @@
 **/
 
 #include <iostream>
-#include <cmath>
-#include <set>
 #include <vector>
 #include <utility>
 #include <algorithm>
@@ -15,70 +13,96 @@
 using namespace std;
 
 typedef long long int ll;
-typedef pair <int, int> pii;
+
+bool cmp(pii a, pii b)
+{
+    if(a.first > b.first)
+        return true;
+    else if(a.first < b.first)
+        return false;
+    else
+    {
+        if(a.second < b.second)
+            return true;
+        else
+            return false;        
+    }    
+}
 
 class Solution
 {
-    set <int> st;
-    set <int>::iterator it;
-    vector <int> vec;
+    pii rud;
+    vector <int> inp[LIM];
+    vector <pii> vec;
 
-    int go(int b, int e)
+    bool compare(pii x)
     {
-        int avg = (vec[b] + vec[e]) / 2;
-
-        int ans = 0;
-        for(int i = b; i <= e; ++i)
-            ans = max(ans, abs(vec[i]-avg));
-
-        return ans;
+        if(rud.first > x.first)
+            return true;
+        else if(rud.first < x.first)
+            return false;
+        else
+        {
+            if(rud.second > x.second)
+                return false;
+            else
+                return true;
+        }        
     }
 public:
     void solve()
     {
-        int n, i, num;
+        int n, m, h, i, j, num, time, point;
 
-        cin >> n;
+        cin >> n >> m >> h;
 
         for(i = 0; i < n; ++i)
         {
-            cin >> num;
-            st.insert(num);
+            for(j = 0; j < m; ++j)
+            {
+                cin >> num;
+                inp[i].push_back(num);
+            }
+
+            sort(inp[i].begin(), inp[i].end());
         }
 
-        for(it = st.begin(); it != st.end(); ++it)
-            vec.push_back(*it);
-
-        n = vec.length();
-
-        if(n < 4)
+        for(i = 0; i < n; ++i)
         {
-            ans = 0;
+            time = point = 0;
+
+            for(j = 0; j < m; ++j)
+            {
+                while(time < h)
+                {
+                    time += inp[i][j];
+                    ++point;
+                }
+            }
+
+            vec.push_back({point, time});
+
+            if(i == 0)
+                rud = {point, time};
         }
-        else
+
+        sort(vec.begin(), vec.end(), cmp);
+
+        int pos = 1;
+
+        for(i = 0; i < n; ++i)
         {
-            vector <pii> temp;
-
-            for(i = 1; i < n; ++i)
-                temp.push_back({ vec[i] - vec[i-1], i });
-
-            sort(temp.begin(), temp.end(), greater <pii>);
-
-            vector <int> pos;
-            pos.push_back(temp[0].second);
-            pos.push_back(temp[1].second);
-
-            sort(pos.begin(), pos.end());
-
-            ans = 0;
-            ans = max(ans, go(0, pos[0]-1));
-            ans = max(ans, go(pos[0], pos[1]-1));
-            ans = max(ans, go(pos[1], n-1));
+            if(compare(vec[i]))
+                break;
+            
+            ++pos;
         }
 
-        cout << ans << '\n';
+        cout << pos << '\n';
 
-        st.clear();
+        for(i = 0; i < n; ++i)
+            inp[i].clear();
+
         vec.clear();
 
         return;
