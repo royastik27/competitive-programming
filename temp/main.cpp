@@ -13,6 +13,9 @@
 using namespace std;
 
 typedef long long int ll;
+typedef pair <int, int> pii;
+
+#define LIM 200010
 
 bool cmp(pii a, pii b)
 {
@@ -52,7 +55,7 @@ class Solution
 public:
     void solve()
     {
-        int n, m, h, i, j, num, time, point;
+        int n, m, h, i, j, num, time, point, penalty;
 
         cin >> n >> m >> h;
 
@@ -69,21 +72,25 @@ public:
 
         for(i = 0; i < n; ++i)
         {
-            time = point = 0;
+            time = penalty = point = 0;
 
-            for(j = 0; j < m; ++j)
+            j = 0;
+            while(j < m)
             {
-                while(time < h)
-                {
-                    time += inp[i][j];
-                    ++point;
-                }
+                if(time + inp[i][j] > h)
+                    break;
+
+                time += inp[i][j];
+                penalty += time;
+
+                ++point;
+                ++j;
             }
 
-            vec.push_back({point, time});
+            vec.push_back({point, penalty});
 
             if(i == 0)
-                rud = {point, time};
+                rud = {point, penalty};
         }
 
         sort(vec.begin(), vec.end(), cmp);
@@ -112,7 +119,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
