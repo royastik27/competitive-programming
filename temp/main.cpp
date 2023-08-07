@@ -6,111 +6,53 @@
 **/
 
 #include <iostream>
-#include <vector>
-#include <utility>
-#include <algorithm>
 
 using namespace std;
 
 typedef long long int ll;
-typedef pair <int, int> pii;
-
-#define LIM 200010
-
-bool cmp(pii a, pii b)
-{
-    if(a.first > b.first)
-        return true;
-    else if(a.first < b.first)
-        return false;
-    else
-    {
-        if(a.second < b.second)
-            return true;
-        else
-            return false;        
-    }    
-}
 
 class Solution
 {
-    pii rud;
-    vector <int> inp[LIM];
-    vector <pii> vec;
-
-    bool compare(pii x)
-    {
-        if(rud.first > x.first)
-            return true;
-        else if(rud.first < x.first)
-            return false;
-        else
-        {
-            if(rud.second > x.second)
-                return false;
-            else
-                return true;
-        }        
-    }
+    string str;
 public:
     void solve()
     {
-        int n, m, h, i, j, num, time, point, penalty;
+        int sz, pos, j;
 
-        cin >> n >> m >> h;
+        cin >> str;
 
-        for(i = 0; i < n; ++i)
+        sz = str.length();
+
+        for(pos = sz - 1; pos >= 0; --pos)
         {
-            for(j = 0; j < m; ++j)
+            if(str[pos] < '5')
+                continue;
+
+            for(j = pos - 1; j >= 0; --j)
             {
-                cin >> num;
-                inp[i].push_back(num);
-            }
-
-            sort(inp[i].begin(), inp[i].end());
-        }
-
-        for(i = 0; i < n; ++i)
-        {
-            time = penalty = point = 0;
-
-            j = 0;
-            while(j < m)
-            {
-                if(time + inp[i][j] > h)
+                if(str[j] < '9')
                     break;
-
-                time += inp[i][j];
-                penalty += time;
-
-                ++point;
-                ++j;
             }
 
-            vec.push_back({point, penalty});
+            if(j < 0)
+            {
+                str = "1";
 
-            if(i == 0)
-                rud = {point, penalty};
+                for(j = 0; j < sz; ++j) 
+                    str.push_back('0');
+            }
+            else
+            {
+                ++str[j];
+
+                i = j;
+
+                for(j = j + 1; j < sz; ++j)
+                    str[j] = '0';
+            }
         }
 
-        sort(vec.begin(), vec.end(), cmp);
-
-        int pos = 1;
-
-        for(i = 0; i < n; ++i)
-        {
-            if(compare(vec[i]))
-                break;
-            
-            ++pos;
-        }
-
-        cout << pos << '\n';
-
-        for(i = 0; i < n; ++i)
-            inp[i].clear();
-
-        vec.clear();
+        cout << str << '\n';
 
         return;
     }
@@ -119,12 +61,10 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
     int TC;
-
-    cin >> TC;
 
     while(TC--)
         sol.solve();
