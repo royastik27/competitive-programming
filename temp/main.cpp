@@ -6,6 +6,8 @@
 **/
 
 #include <iostream>
+#include <map>
+#include <vector>
 
 using namespace std;
 
@@ -13,62 +15,50 @@ typedef long long int ll;
 
 class Solution
 {
-    string str;
+    map <int, int> mp;
+    map <int, int>::iterator it;
+
+    vector <int> ans;
 public:
     void solve()
     {
-        int sz, pos, j;
+        int n, i, sz, num;
 
-        cin >> str;
+        cin >> n;
 
-        sz = str.length();
+        sz = n * (n-1) / 2;
 
-        prop_pos = sz;
-        prop = 0; 
-
-        for(i = sz - 1; i >= 0; --i)
+        for(i = 0; i < sz; ++i)
         {
-            if(str[i] < '5')
-            {
-                if(prop)
-                {
-                    ++str[i];
-                    prop_pos = i + 1;
-                    prop = 0;
-                }
-            }
-            else
-            {
-                if(prop)
-                {
-                    if(str[i] == '9')
-                        continue;
-                    else
-                    {
-                        ++str[i];
-                        prop_pos = i + 1;
-                    }
-                }
-                else
-                    ++prop;
-            }
+            cin >> num;
+
+            ++mp[num];
         }
 
-        if(prop)
-        {
-            cout << 1;
+        need = n-1;
 
-            for(i = 0; i < sz; ++i)
-                cout << '0';
-            cout << '\n';
-        }
-        else
+        for(it = mp.begin(); it != mp.end();)
         {
-            for(i = prop_pos; i < sz; ++i)
-                str[i] = '0';
+            ans.push_back(it->first);
+            num = it->first;
 
-            cout << str << '\n';
+            it->second -= need;
+
+            if(it->second == 0)
+                ++it;
+
+            --need;
         }
+
+        ans.push_back(num);
+
+        for(i = n - 1; i >= 0; ++i)
+            cout << ans[i] << ' ';
+        cout << '\n';
+
+
+        mp.clear();
+        ans.clear();
 
         return;
     }
@@ -77,13 +67,13 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
     int TC;
 
     cin >> TC;
-
+    
     while(TC--)
         sol.solve();
 
