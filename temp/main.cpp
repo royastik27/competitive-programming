@@ -23,36 +23,52 @@ public:
 
         sz = str.length();
 
-        for(pos = sz - 1; pos >= 0; --pos)
+        prop_pos = sz;
+        prop = 0; 
+
+        for(i = sz - 1; i >= 0; --i)
         {
-            if(str[pos] < '5')
-                continue;
-
-            for(j = pos - 1; j >= 0; --j)
+            if(str[i] < '5')
             {
-                if(str[j] < '9')
-                    break;
-            }
-
-            if(j < 0)
-            {
-                str = "1";
-
-                for(j = 0; j < sz; ++j) 
-                    str.push_back('0');
+                if(prop)
+                {
+                    ++str[i];
+                    prop_pos = i + 1;
+                    prop = 0;
+                }
             }
             else
             {
-                ++str[j];
-
-                i = j;
-
-                for(j = j + 1; j < sz; ++j)
-                    str[j] = '0';
+                if(prop)
+                {
+                    if(str[i] == '9')
+                        continue;
+                    else
+                    {
+                        ++str[i];
+                        prop_pos = i + 1;
+                    }
+                }
+                else
+                    ++prop;
             }
         }
 
-        cout << str << '\n';
+        if(prop)
+        {
+            cout << 1;
+
+            for(i = 0; i < sz; ++i)
+                cout << '0';
+            cout << '\n';
+        }
+        else
+        {
+            for(i = prop_pos; i < sz; ++i)
+                str[i] = '0';
+
+            cout << str << '\n';
+        }
 
         return;
     }
@@ -61,10 +77,12 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
+
+    cin >> TC;
 
     while(TC--)
         sol.solve();
