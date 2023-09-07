@@ -6,59 +6,93 @@
 **/
 
 #include <iostream>
-#include <map>
-#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 typedef long long int ll;
 
+#define LIM 110
+
 class Solution
 {
-    map <int, int> mp;
-    map <int, int>::iterator it;
+    int arr[LIM], tree[LIM*3];
 
-    vector <int> ans;
+    int query(int b, int e, int node = 1)
+    {
+        if(b > right || e < left)
+            return 0;
+        else if(b >= left && e <= right)
+            return tree[node];
+        else
+        {
+            int mid = (b+e) / 2, left = node*2, right = left + 1;
+
+            return query(b, mid, left) ^ query(mid+1, e, right);
+        }
+    }
+
+    void build(int b, int e, int node = 1)
+    {
+        if(b == e)
+            tree[node] = arr[b];
+        else
+        {
+            int mid = (b+e) / 2, left = node*2, right = left + 1;
+
+            build(b, mid, left);
+            build(mid+1, e, right);
+
+            tree[node] = tree[left] ^ tree[right];
+        }
+
+        return;
+    }
 public:
     void solve()
     {
-        int n, i, sz, num;
+        int n;
+        bool el;
 
         cin >> n;
 
-        sz = n * (n-1) / 2;
+        for(i = 1; i <= n; ++i)
+            cin >> arr[i];
 
-        for(i = 0; i < sz; ++i)
+        ans0 = ans1 = 0;
+        for(i = 1; i <= n; ++i)
         {
-            cin >> num;
+            cin >> el;
 
-            ++mp[num];
+            if(el) ans1 ^= el;
+            else ans0 ^= el;
         }
 
-        need = n-1;
+        build(1, n);
 
-        for(it = mp.begin(); it != mp.end();)
+        cin >> q;
+
+        while(q--)
         {
-            ans.push_back(it->first);
-            num = it->first;
+            cin >> op;
 
-            it->second -= need;
+            if(op == 1)
+            {
+                cin >> left >> right;
 
-            if(it->second == 0)
-                ++it;
+                res = query(1, n);
 
-            --need;
-        }
+                ans0 ^= res;
+                ans1 ^= res;
+            }
+            else
+            {
+                cin >> el;
 
-        ans.push_back(num);
-
-        for(i = n - 1; i >= 0; ++i)
-            cout << ans[i] << ' ';
-        cout << '\n';
-
-
-        mp.clear();
-        ans.clear();
+                if(el) cout << ans1 << '\n';
+                else cout << ans0 << '\n';
+            }
+        }       
 
         return;
     }
@@ -67,13 +101,13 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
 
     cin >> TC;
-    
+
     while(TC--)
         sol.solve();
 

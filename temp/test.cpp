@@ -29,7 +29,8 @@ int main()
     // cin.tie(NULL);
 
     Solution sol;
-    //
+    
+    sol.solve();
 
     return 0;
 }
