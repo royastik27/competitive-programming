@@ -6,93 +6,54 @@
 **/
 
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 typedef long long int ll;
 
-#define LIM 110
-
 class Solution
 {
-    int arr[LIM], tree[LIM*3];
+    char grid[10][10];
 
-    int query(int b, int e, int node = 1)
+    bool ok(int i, int j)
     {
-        if(b > right || e < left)
-            return 0;
-        else if(b >= left && e <= right)
-            return tree[node];
-        else
-        {
-            int mid = (b+e) / 2, left = node*2, right = left + 1;
-
-            return query(b, mid, left) ^ query(mid+1, e, right);
-        }
+        return (grid[i][j] == 'X');
     }
 
-    void build(int b, int e, int node = 1)
+    int go(int bod)
     {
-        if(b == e)
-            tree[node] = arr[b];
-        else
-        {
-            int mid = (b+e) / 2, left = node*2, right = left + 1;
+        int ans = 0, i, j;
 
-            build(b, mid, left);
-            build(mid+1, e, right);
+        for(i = bod+1; i <= 8-bod; ++i)
+            if(ok(bod, i))
+                ans += (bod+1);
+        
+        for(i = bod+1; i <= 8-bod; ++i)
+            if(ok(9-bod, i))
+                ans += (bod+1);
 
-            tree[node] = tree[left] ^ tree[right];
-        }
+        for(i = bod; i <= 9 - bod; ++i)
+            if(ok(i, bod))
+                ans += (bod+1);
 
-        return;
+        for(i = bod; i <= 9 - bod; ++i)
+            if(ok(i, 9-bod))
+                ans += (bod+1);
+
+        return ans;
+
     }
 public:
     void solve()
     {
-        int n;
-        bool el;
 
-        cin >> n;
+        for(i = 0; i < 10; ++i)
+            for(j = 0; j < 10; ++j)
+                cin >> grid[i][j];
 
-        for(i = 1; i <= n; ++i)
-            cin >> arr[i];
-
-        ans0 = ans1 = 0;
-        for(i = 1; i <= n; ++i)
-        {
-            cin >> el;
-
-            if(el) ans1 ^= el;
-            else ans0 ^= el;
-        }
-
-        build(1, n);
-
-        cin >> q;
-
-        while(q--)
-        {
-            cin >> op;
-
-            if(op == 1)
-            {
-                cin >> left >> right;
-
-                res = query(1, n);
-
-                ans0 ^= res;
-                ans1 ^= res;
-            }
-            else
-            {
-                cin >> el;
-
-                if(el) cout << ans1 << '\n';
-                else cout << ans0 << '\n';
-            }
-        }       
+        ans = 0;
+        for(i = 0; i < 5; ++i)
+            ans += go(i);
 
         return;
     }
