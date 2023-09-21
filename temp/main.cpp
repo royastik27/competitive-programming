@@ -6,6 +6,7 @@
 **/
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,47 +14,56 @@ typedef long long int ll;
 
 class Solution
 {
-    char grid[10][10];
+    ll cum;
+    vector <int>::iterator UB;
 
-    bool ok(int i, int j)
+    ll water(int height)
     {
-        return (grid[i][j] == 'X');
-    }
+        UB = lower_bound(vec.begin(), vec.end(), height);
 
-    int go(int bod)
-    {
-        int ans = 0, i, j;
+        int idx = distance(vec.begin(), vec.end());
 
-        for(i = bod+1; i <= 8-bod; ++i)
-            if(ok(bod, i))
-                ans += (bod+1);
-        
-        for(i = bod+1; i <= 8-bod; ++i)
-            if(ok(9-bod, i))
-                ans += (bod+1);
+        if(idx == 0)
+            return 0;
 
-        for(i = bod; i <= 9 - bod; ++i)
-            if(ok(i, bod))
-                ans += (bod+1);
-
-        for(i = bod; i <= 9 - bod; ++i)
-            if(ok(i, 9-bod))
-                ans += (bod+1);
-
-        return ans;
-
+        return cum[idx-1] - ll(height) * idx;
     }
 public:
     void solve()
     {
+        cin >> n >> x;
 
-        for(i = 0; i < 10; ++i)
-            for(j = 0; j < 10; ++j)
-                cin >> grid[i][j];
+        for(i = 0; i < n; ++i)
+        {
+            cin >> num;
 
-        ans = 0;
-        for(i = 0; i < 5; ++i)
-            ans += go(i);
+            vec.push_back(num);
+        }
+
+        sort(vec.begin(), vec.end());
+
+        cum.push_back(vec[0]);
+        for(i = 1; i < n; ++i)
+            cum.push_back(vec[i] + cum[i-1]);
+        
+        low = 1;
+        high = *max_element(vec.begin(), vec.end());
+
+        ans = 1;
+        while(low <= high)
+        {
+            mid = (low + high) / 2;
+
+            if(water(mid) <= x)
+            {
+                ans = mid;
+                low = mid+1;
+            }
+            else
+                high = mid-1;
+        }
+
+        cout << ans << '\n';
 
         return;
     }
