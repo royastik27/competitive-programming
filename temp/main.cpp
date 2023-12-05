@@ -22,14 +22,20 @@ class Solution
 
     bool check(int k)
     {
-        int point = 0, i;
+        int lpoint, rpoint, i;
+
+        lpoint = rpoint = 0;
 
         for(i = 0; i < n; ++i)
         {
-            if(point + k < vec[i].first)
+            lpoint = lpoint - k;
+            rpoint = rpoint + k;
+
+            if(rpoint < vec[i].first || lpoint > vec[i].second)
                 return false;
 
-            point = min(point + k, vec[i].second);
+            lpoint = max(lpoint, vec[i].first);
+            rpoint = min(rpoint, vec[i].second);
         }
 
         return true;
@@ -67,6 +73,8 @@ public:
 
         cout << go() << '\n';
 
+        vec.clear();
+
         return;
     }
 };
@@ -74,7 +82,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
