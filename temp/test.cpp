@@ -6,8 +6,6 @@
 **/
 
 #include <iostream>
-#include <set>
-#include <algorithm>
 
 using namespace std;
 
@@ -15,17 +13,11 @@ typedef long long int ll;
 
 class Solution
 {
-    set <int> st;
-    set <int>::iterator it;
+
 public:
     void solve()
     {
-        it = st.end();
-        --it;
-
-        cout << "FUCK\n";
-
-        
+        cout << "Best of luck!\n";
 
         return;
     }
@@ -37,7 +29,11 @@ int main()
     // cin.tie(NULL);
 
     Solution sol;
+    int TC;
 
+    cin >> TC;
+
+    while(TC--)
         sol.solve();
 
     return 0;

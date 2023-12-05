@@ -1,54 +1,71 @@
 /**
-* Codeforces Round 905 (Div. 3)
-* Problem D - In Love
-* TIME: 155 ms
+* [name]
+* Problem 
+* TIME: 
 * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
-#include <set>
+#include <vector>
 
 using namespace std;
 
 typedef long long int ll;
+typedef pair <int, int> pii;
+
+#define INF 1000000000
 
 class Solution
 {
-    multiset <int> left, right;
-    multiset <int>::iterator leftMx, rightMn;
+    int n;
+    vector <pii> vec;
+
+    bool check(int k)
+    {
+        int point = 0, i;
+
+        for(i = 0; i < n; ++i)
+        {
+            if(point + k < vec[i].first)
+                return false;
+
+            point = min(point + k, vec[i].second);
+        }
+
+        return true;
+    }
+    
+    int go()
+    {
+        int low = 0, high = INF, mid;
+
+        while(low <= high)
+        {
+            mid = (low + high) / 2;
+
+            if(check(mid))
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+
+        return low;
+    }
 public:
     void solve()
     {
-        int n, l, r;
-        char op;
+        int i, left, right;
 
         cin >> n;
 
-        while(n--)
+        for(i = 0; i < n; ++i)
         {
-            cin >> op >> l >> r;
+            cin >> left >> right;
 
-            if(op == '+') {
-                left.insert(l);
-                right.insert(r);
-            }
-            else
-            {
-                left.erase(left.find(l));
-                right.erase(right.find(r));
-            }
-
-            if(!left.size())
-                cout << "NO\n";
-            else {
-                leftMx = --left.end();
-                rightMn = right.begin();
-
-                if(*leftMx > *rightMn)
-                    cout << "YES\n";
-                else cout << "NO\n";
-            }
+            vec.push_back({left, right});
         }
+
+        cout << go() << '\n';
 
         return;
     }
@@ -57,11 +74,15 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
+    int TC;
 
-    sol.solve();
+    cin >> TC;
+
+    while(TC--)
+        sol.solve();
 
     return 0;
 }
