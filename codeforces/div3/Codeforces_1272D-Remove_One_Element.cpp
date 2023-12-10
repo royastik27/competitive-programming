@@ -1,6 +1,6 @@
 /**
 * Codeforces Round 605 (Div. 3)
-* Problem D - Codeforces Round 605 (Div. 3)
+* Problem D - Remove One Element
 * TIME: 78 ms
 * AUTHOR: Astik Roy
 **/
