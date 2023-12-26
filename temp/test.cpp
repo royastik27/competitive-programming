@@ -6,67 +6,63 @@
 **/
 
 #include <iostream>
+#include <cstring>
+#include <vector>
 
 using namespace std;
 
 typedef long long int ll;
 
-#define LIM 1000
-#define MOD 998244353
-
 class Solution
 {
-    int fact[LIM+1];
+    vector <int> a, forw, back;
 public:
-    Solution()
-    {
-        fact[0] = 1;
-
-        for(int i = 1; i <= LIM; ++i) {
-            fact[i] = (ll)fact[i-1] * i % MOD;
-        }
-    }
     void solve()
     {
-        int n, num, mx1, mx2, diff, i, ans, cnt;
+        int n, i, curr, plus2, minus2;
+        ll ans;
 
-        cin >> n >> num;
-
-        mx1 = mx2 = num;
-        cnt = 1;
-
-        for(i = 1; i < n; ++i) {
-            cin >> num;
-
-            if(num >= mx1) {
-                mx2 = mx1;
-                mx1 = num;
-                cnt = 1;
-            }
-            else if(num == mx2)
-                ++cnt;
+        cin >> n;
+        
+        a.resize(n);
+        forw.resize(n+2);
+        back.resize(n+2);
+        
+        for(i = 0; i < n; ++i) {
+            cin >> a[i];
+            forw[i] = back[i] = 0;
         }
 
-        diff = mx1 - mx2;
+        forw[n] = back[n] = forw[n+1] = back[n+1] = 0;
 
-        if(diff >= 2)
-            ans = 0;
-        else if(!diff)
-            ans = fact[n];
-        else { // mx1 - mx2 = 1
-            ans = fact[n];
+        // backward array
+        for(i = n-1; i > 0; --i)
+            ++back[a[i]];
 
-            for(i = cnt+1; i <= n; ++i) {
-                cout << "(" << i << "-1)! and " << "(" << n << "-" << i << ")!\n";
-                ans -= (ll)fact[i-1] * fact[n-i] % MOD;
+        ans = 0;
+        for(i = 1; i < n-1; ++i)
+        {
+            curr = a[i];
+            minus2 = max(curr-2, 0);
+            plus2 = min(curr+2, n+1);
 
-                ans %= MOD;
-            }
+            ++forw[a[i-1]];
+            --back[curr];
 
-            ans = (ans+MOD) % MOD;
+            // as max
+            ans += ll(forw[minus2]+forw[curr-1]+forw[curr]) * (back[minus2]+back[curr-1]+back[curr]);
+
+            // as min
+            ans += ll(forw[plus2]+forw[curr+1]+forw[curr]) * (back[plus2]+back[curr+1]+back[curr]);
+
+            // duplicates of curr - curr - curr
+            ans -= (ll)forw[curr] * back[curr];
+
+            // as medium
+            ans += (ll)forw[curr+1] * back[curr-1] + (ll)forw[curr-1] * back[curr+1];
         }
 
-        cout << ans << '\n';
+        cout << ans << '\n';        
 
         return;
     }
@@ -82,7 +78,7 @@ int main()
 
     cin >> TC;
 
-    while(TC--)
+    while(TC--) 
         sol.solve();
 
     return 0;
