@@ -54,7 +54,7 @@ int main(int argc, char * argv[])
 
         fileName = argv[2];
 
-        char command[100] = "g++ ";
+        char command[100] = "g++ -std=c++0x ";
 
         strcat(command, fileName);
         strcat(command, ".cpp -o ");

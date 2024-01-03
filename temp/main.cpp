@@ -6,8 +6,8 @@
 **/
 
 #include <iostream>
-#include <cstring>
-#include <vector>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,54 +15,44 @@ typedef long long int ll;
 
 class Solution
 {
-    vector <int> a, forw, back;
+    map < pair<int,int>, int> mp;
+    map < pair<int,int>, int>::iterator it;
+
+    pair < map < pair<int,int>, int>::iterator, bool> check;
 public:
     void solve()
     {
-        int n, i, curr, plus2, minus2;
-        ll ans;
+        int n, D, K, i, d, a, b, ans;
+        string s;
 
-        cin >> n;
-        
-        a.resize(n);
-        forw.resize(n+2);
-        back.resize(n+2);
+        cin >> n >> s;
+
+        D = K = 0;
         
         for(i = 0; i < n; ++i) {
-            cin >> a[i];
-            forw[i] = back[i] = 0;
+            if(s[i] == 'D') ++D;
+            else            ++K;
+
+            d = __gcd(D, K);
+            a = D / d;
+            b = K / d;
+
+            check = mp.insert({ {a, b}, 1 });
+
+            if(check.second)
+                ans = 1;
+            else {
+                it = check.first;
+
+                ans = 1 + it->second;
+                ++it->second;
+            }
+            
+            cout << ans << ' ';
         }
+        cout << '\n';
 
-        forw[n] = back[n] = forw[n+1] = back[n+1] = 0;
-
-        // backward array
-        for(i = n-1; i > 0; --i)
-            ++back[a[i]];
-
-        ans = 0;
-        for(i = 1; i < n-1; ++i)
-        {
-            curr = a[i];
-            minus2 = max(curr-2, 0);
-            plus2 = min(curr+2, n+1);
-
-            ++forw[a[i-1]];
-            --back[curr];
-
-            // as max
-            ans += ll(forw[minus2]+forw[curr-1]+forw[curr]) * (back[minus2]+back[curr-1]+back[curr]);
-
-            // as min
-            ans += ll(forw[plus2]+forw[curr+1]+forw[curr]) * (back[plus2]+back[curr+1]+back[curr]);
-
-            // duplicates of curr - curr - curr
-            ans -= (ll)forw[curr] * back[curr];
-
-            // as medium
-            ans += (ll)forw[curr+1] * back[curr-1] + (ll)forw[curr-1] * back[curr+1];
-        }
-
-        cout << ans << '\n';        
+        mp.clear();
 
         return;
     }
@@ -78,7 +68,7 @@ int main()
 
     cin >> TC;
 
-    while(TC--) 
+    while(TC--)
         sol.solve();
 
     return 0;
