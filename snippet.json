@@ -19,7 +19,8 @@
 
 			"using namespace std;\n",
 
-			"typedef long long int ll;\n",
+			"typedef long long int ll;",
+			"typedef pair <int, int> pii;\n",
 			
 			"class Solution",
 			"{\n",

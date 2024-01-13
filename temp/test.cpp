@@ -10,6 +10,7 @@
 using namespace std;
 
 typedef long long int ll;
+typedef pair <int, int> pii;
 
 class Solution
 {
@@ -17,7 +18,7 @@ class Solution
 public:
     void solve()
     {
-        cout << "Best of luck!\n";
+        cout << "Best of luck dear!!!\n";
 
         return;
     }

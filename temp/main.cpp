@@ -6,53 +6,55 @@
 **/
 
 #include <iostream>
-#include <map>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
 typedef long long int ll;
+typedef pair <int, int> pii;
 
 class Solution
 {
-    map < pair<int,int>, int> mp;
-    map < pair<int,int>, int>::iterator it;
+    int n;
+    vector <int> a;
+    vector <ll> presum;
 
-    pair < map < pair<int,int>, int>::iterator, bool> check;
+    inline ll sum(int b, int e)
+    {
+        if(b > n || e < 1)
+            return 0;
+
+        return (presum[e] - presum[b-1]);
+    }
 public:
     void solve()
     {
-        int n, D, K, i, d, a, b, ans;
-        string s;
+        int alice, bob, i;
+        ll ans;
 
-        cin >> n >> s;
+        cin >> n >> alice >> bob;
 
-        D = K = 0;
-        
-        for(i = 0; i < n; ++i) {
-            if(s[i] == 'D') ++D;
-            else            ++K;
+        a.resize(n);
 
-            d = __gcd(D, K);
-            a = D / d;
-            b = K / d;
+        for(i = 0; i < n; ++i)
+            cin >> a[i];
 
-            check = mp.insert({ {a, b}, 1 });
+        sort(a.begin(), a.end(), greater <int>());
 
-            if(check.second)
-                ans = 1;
-            else {
-                it = check.first;
+        // presum.resize(n+1);
+        presum.push_back(0);
+        for(i = 0; i < n; ++i)
+            presum.push_back(presum[i] + a[i]);        
 
-                ans = 1 + it->second;
-                ++it->second;
-            }
-            
-            cout << ans << ' ';
-        }
-        cout << '\n';
+        ans = sum(min(n, bob)+1, n) - sum(1, min(n, bob));
 
-        mp.clear();
+        for(i = 1; i <= alice; ++i)
+            ans = max(ans, sum(min(n, i+bob)+1, n) - sum(1+i, min(n, i+bob)));
+
+        cout << ans << '\n';
+
+        presum.clear();
 
         return;
     }
