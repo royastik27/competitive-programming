@@ -18,7 +18,7 @@ class Solution
 public:
     void solve()
     {
-        cout << "Best of luck dear!!!\n";
+        // 
 
         return;
     }

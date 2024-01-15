@@ -6,8 +6,7 @@
 **/
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <set>
 
 using namespace std;
 
@@ -16,45 +15,55 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-    int n;
-    vector <int> a;
-    vector <ll> presum;
-
-    inline ll sum(int b, int e)
-    {
-        if(b > n || e < 1)
-            return 0;
-
-        return (presum[e] - presum[b-1]);
-    }
+    multiset <int> s1, s2;
+    multiset <int>::iterator mn, mx, to_del;
 public:
     void solve()
     {
-        int alice, bob, i;
-        ll ans;
-
-        cin >> n >> alice >> bob;
+        cin >> n >> m;
 
         a.resize(n);
+        b.resize(m);
 
         for(i = 0; i < n; ++i)
             cin >> a[i];
 
-        sort(a.begin(), a.end(), greater <int>());
+        for(i = 0; i < m; ++i) {
+            cin >> b[i];
+            s1.insert(b[i]);
+            s2.insert(b[i]);
+        }
 
-        // presum.resize(n+1);
-        presum.push_back(0);
-        for(i = 0; i < n; ++i)
-            presum.push_back(presum[i] + a[i]);        
+        sort(a.begin(), a.end());
 
-        ans = sum(min(n, bob)+1, n) - sum(1, min(n, bob));
+        ans1 = ans2 = 0;
+        // forward pass
+        for(i = 0; i < n; ++i) {
+            mn = s1.begin();
+            mx = --s1.end();
 
-        for(i = 1; i <= alice; ++i)
-            ans = max(ans, sum(min(n, i+bob)+1, n) - sum(1+i, min(n, i+bob)));
+            mn_diff = a[i] - *mn;
+            if(mn_diff < 0) mn_diff = 0 - mn_diff;
 
-        cout << ans << '\n';
+            mx_diff = *mx - a[i];
+            if(mx_diff < 0) mx_diff = 0 - mx_diff;
 
-        presum.clear();
+            if(mn_diff > mx_diff) {
+                ans1 += mn_diff;
+                to_del = mn;
+            }
+            else {
+                ans1 += mx_diff;
+                to_del = mx;
+            }
+
+            s1.erase(to_del);
+        }
+
+        // backward pass
+        for(i = n-1; i >= 0; --i) {
+            //
+        }
 
         return;
     }
@@ -63,7 +72,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
     int TC;
