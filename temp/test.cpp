@@ -14,11 +14,14 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-
+    void tell(int a, int b) {
+        cout << "a and b: " << a << ' ' << b << '\n';
+    }
 public:
     void solve()
     {
-        // 
+        int a = 10;
+        tell(a--, a);
 
         return;
     }
@@ -30,12 +33,7 @@ int main()
     // cin.tie(NULL);
 
     Solution sol;
-    int TC;
-
-    cin >> TC;
-
-    while(TC--)
-        sol.solve();
+    sol.solve();
 
     return 0;
 }
