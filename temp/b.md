@@ -1,3 +1,0 @@
-...
-
-Now the point is how to find the rightmost index i, such that, 3 | SUM (a[i], a[j])

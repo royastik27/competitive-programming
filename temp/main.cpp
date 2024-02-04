@@ -1,106 +1,76 @@
 /**
-* VK Cup 2012 Round 1
-* Problem D - Distance in Tree
-* TIME: 310 ms
+* [name]
+* Problem 
+* TIME: 
 * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
-#include <cstring>
+#include <climits>
 #include <vector>
+#include <algorithm>
+
+#include <ext/pb_ds/assoc_container.hpp> // Common file
+#include <ext/pb_ds/tree_policy.hpp>
 
 using namespace std;
+using namespace __gnu_pbds;
 
 typedef long long int ll;
 typedef pair <int, int> pii;
 
-#define LIM 50000
-#define KLIM 500
+// #define LIM 200010
+#define LIM 2010
 
 class Solution
 {
-    int n, k, vis[LIM+1], halfK, dp[LIM+1][KLIM+1];
-    ll ans;
-    vector <int> adj[LIM + 1];
+    int tree[LIM * 4], depth[LIM * 4];
+    vector <pii> inp;
 
-    void count_pairs(int node = 1)
+    int insert(int val, int node = 1)
     {
-        vis[node] = true;
+        cout << "Calling Node: " << node << "\t value: " << tree[node] << '\n';
+        ++depth[node];
 
-        int i, j, sz, child, cnt;
-        vector <int> cntHalfK;
-        
-        memset(dp[node], 0, sizeof(dp[node]));
-        dp[node][0] = 1;
-
-        sz = adj[node].size();
-        for(i = 0; i < sz; ++i) {
-            child = adj[node][i];
-
-            if(!vis[child]) {
-                count_pairs(child);
-
-                for(j = 1; j <= k; ++j) // till k-1
-                    dp[node][j] += dp[child][j-1];
-
-                // for halfK
-                if(halfK) {
-                    if(cnt = dp[child][halfK-1])
-                        cntHalfK.push_back(cnt);
-                }
-
-                // making unvisited again
-                vis[child] = false;
-            }
+        if(tree[node] == INT_MAX) {
+            tree[node] = val;
+            return 0;
         }
 
-        // via only one child
-        ans += dp[node][k];
+        int left = node*2, right = left + 1;
 
-        // via two child with less than halfK
-        int lim = (k+1) / 2 - 1;
-        for(i = 0; i < sz; ++i) {
-            child = adj[node][i];
-
-            if(!vis[child]) {
-                for(j = 0; j < lim; ++j)
-                    ans += dp[child][j] * (dp[node][k-1-j] - dp[child][k-2-j]);
-            }
-        }
-
-        // via two child with halfK each
-        if(halfK && (sz = cntHalfK.size()) > 1) {
-            int sum = 0;
-            
-            for(i = sz - 1; i >= 0; --i)
-                sum += cntHalfK[i];
-            
-            for(i = 0; i+1 < sz; ++i) {
-                sum -= cntHalfK[i];
-                ans += cntHalfK[i] * sum;
-            }
-        }
+        if(val > tree[node])
+            return insert(val, right);
+        else
+            return 1 + depth[right] + insert(val, left);
     }
 public:
     void solve()
     {
-        int i, u, v;
+        int n, i, lim;
+        ll ans;
 
-        cin >> n >> k;
+        cin >> n;
 
-        if(k & 1) halfK = 0;
-        else halfK = k/2;
+        inp.resize(n);
 
-        for(i = 1; i < n; ++i) {
-            cin >> u >> v;
+        for(i = 0; i < n; ++i)
+            cin >> inp[i].first >> inp[i].second;
 
-            adj[u].push_back(v);
-            adj[v].push_back(u);
+        sort(inp.begin(), inp.end());
+
+        // initializing tree
+        lim = 4*n;
+        for(i = 1; i <= lim; ++i) {
+            tree[i] = INT_MAX;
+            depth[i] = 0;
         }
 
         ans = 0;
-        memset(vis, 0, sizeof(vis));
-        count_pairs();
+        for(i = 0; i < n; ++i) {
+            cout << "\nFor " << inp[i].second << '\n';
+            ans += insert(inp[i].second);
+        }
 
         cout << ans << '\n';
 
@@ -111,11 +81,15 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
-    
-    sol.solve();
+    int TC;
+
+    cin >> TC;
+
+    while(TC--)
+        sol.solve();
 
     return 0;
 }
