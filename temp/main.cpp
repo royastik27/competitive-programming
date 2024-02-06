@@ -6,73 +6,66 @@
 **/
 
 #include <iostream>
-#include <climits>
 #include <vector>
-#include <algorithm>
 
-#include <ext/pb_ds/assoc_container.hpp> // Common file
-#include <ext/pb_ds/tree_policy.hpp>
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// #include <functional>
 
 using namespace std;
-using namespace __gnu_pbds;
+// using namespace __gnu_pbds;
 
 typedef long long int ll;
 typedef pair <int, int> pii;
 
-// #define LIM 200010
-#define LIM 2010
+// typedef tree<int , null_mapped_type ,  less<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_set;
+// typedef tree<int , null_mapped_type ,  less_equal<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_multiset;
 
 class Solution
 {
-    int tree[LIM * 4], depth[LIM * 4];
-    vector <pii> inp;
+    int a, b;
+    bool front;
+    vector <int> ans;
 
-    int insert(int val, int node = 1)
+    void process(int idx)
     {
-        cout << "Calling Node: " << node << "\t value: " << tree[node] << '\n';
-        ++depth[node];
-
-        if(tree[node] == INT_MAX) {
-            tree[node] = val;
-            return 0;
-        }
-
-        int left = node*2, right = left + 1;
-
-        if(val > tree[node])
-            return insert(val, right);
+        if(front)
+            ans[idx] = a++;
         else
-            return 1 + depth[right] + insert(val, left);
+            ans[idx] = b--;
+
+        front ^= 1;
     }
 public:
     void solve()
     {
-        int n, i, lim;
-        ll ans;
+        int n, k, i;
 
-        cin >> n;
+        cin >> n >> k;
 
-        inp.resize(n);
+        ans.resize(n+1);
 
-        for(i = 0; i < n; ++i)
-            cin >> inp[i].first >> inp[i].second;
+        // for(i = 1; i <= n; ++i) {
+        //     ans[i] = 0;
+        // }
 
-        sort(inp.begin(), inp.end());
+        a = 1;
+        b = n;
+        front = true;
 
-        // initializing tree
-        lim = 4*n;
-        for(i = 1; i <= lim; ++i) {
-            tree[i] = INT_MAX;
-            depth[i] = 0;
+        for(i = 1; i <= k; i += 2) {
+
+            for(j = i; j <= n; j += k) {
+                process(j);
+
+                if(j + 1 <= n)
+                    process(j+1);
+            }
         }
 
-        ans = 0;
-        for(i = 0; i < n; ++i) {
-            cout << "\nFor " << inp[i].second << '\n';
-            ans += insert(inp[i].second);
-        }
-
-        cout << ans << '\n';
+        for(i = 1; i <= n; ++i)
+            cout << ans[i] << ' ';
+        cout << '\n';
 
         return;
     }
