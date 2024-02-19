@@ -26,7 +26,14 @@ class Solution
 public:
     void solve()
     {
-        // 
+        int a, b, c;
+        
+        cin >> a >> b >> c;
+
+        if(a+b == c || b - a == c || a - b == c || a*b == c || (a%b==0 && a/b==c) || (b%a==0 && b/a==c))
+            cout << "Possible\n";
+        else
+            cout << "Impossible\n";
 
         return;
     }
@@ -35,7 +42,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;

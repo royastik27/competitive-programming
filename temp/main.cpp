@@ -6,7 +6,6 @@
 **/
 
 #include <iostream>
-#include <vector>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -23,49 +22,57 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-    int a, b;
-    bool front;
-    vector <int> ans;
+    int n;
 
-    void process(int idx)
+    bool check(int x, int y)
     {
-        if(front)
-            ans[idx] = a++;
-        else
-            ans[idx] = b--;
+        int x2, y2;
 
-        front ^= 1;
+        x2 = x;
+        while(x2+1 <= n && a[x2+1][y] == '1')
+            ++x2;
+
+        if(x == x2) 
+            return false;
+
+        y2 = y + x2 - x;
+
+        for(i = x; i <= x2; ++i) {
+            for(j = y; j <= y2; ++j) {
+                if(a[i][j] != '1')
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool isSquare(int n)
+    {
+        int i, j;
+
+        for(i = 0; i < n; ++i) {
+            for(j = 0; j < n; ++j) {
+                if(a[i][j] == '1')
+                    return check(i, j);
+            }
+        }
+
+        return false;
     }
 public:
     void solve()
     {
-        int n, k, i;
+        cin >> n;
 
-        cin >> n >> k;
-
-        ans.resize(n+1);
-
-        // for(i = 1; i <= n; ++i) {
-        //     ans[i] = 0;
-        // }
-
-        a = 1;
-        b = n;
-        front = true;
-
-        for(i = 1; i <= k; i += 2) {
-
-            for(j = i; j <= n; j += k) {
-                process(j);
-
-                if(j + 1 <= n)
-                    process(j+1);
+        for(i = 0; i < n; ++i) {
+            for(j = 0; j < n; ++j) {
+                cin >> a[i][j];
             }
         }
 
-        for(i = 1; i <= n; ++i)
-            cout << ans[i] << ' ';
-        cout << '\n';
+        if(isSquare()) cout << "SQUARE\n";
+        else cout << "TRIANGLE\n";
 
         return;
     }
@@ -74,7 +81,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
