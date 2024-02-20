@@ -6,6 +6,7 @@
 **/
 
 #include <iostream>
+#include <vector>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -22,57 +23,63 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-    int n;
 
-    bool check(int x, int y)
-    {
-        int x2, y2;
-
-        x2 = x;
-        while(x2+1 <= n && a[x2+1][y] == '1')
-            ++x2;
-
-        if(x == x2) 
-            return false;
-
-        y2 = y + x2 - x;
-
-        for(i = x; i <= x2; ++i) {
-            for(j = y; j <= y2; ++j) {
-                if(a[i][j] != '1')
-                    return false;
-            }
-        }
-
-        return true;
-    }
-
-    bool isSquare(int n)
-    {
-        int i, j;
-
-        for(i = 0; i < n; ++i) {
-            for(j = 0; j < n; ++j) {
-                if(a[i][j] == '1')
-                    return check(i, j);
-            }
-        }
-
-        return false;
-    }
 public:
     void solve()
     {
-        cin >> n;
+        cin >> n; 
 
         for(i = 0; i < n; ++i) {
-            for(j = 0; j < n; ++j) {
-                cin >> a[i][j];
+            cin >> a[i];
+        }
+
+        for(i = 0; i < n; ++i) {
+            cin >> b[i];
+        }
+
+        forw.resize(n, -1);
+
+        i = 0;
+        j = 0;
+        while(i < n && j < n) {
+            if(a[i] == b[j]) {
+                forw[j] = i;
+                ++j;
+            }
+
+            ++i;
+        }
+
+        // for back
+        back.resize(n, -1);
+
+        i = n-1;
+        j = n-1;
+        while(i >= 0 && j >= 0) {
+            if(a[i] == b[j]) {
+                back[j] = i;
+                --j;
+            }
+
+            --i;
+        }
+
+        // processing
+        ans = n;
+
+        for(i = 0; i < n; ++i) {
+            for(j = i; j < n; ++j) {
+                // i to j inclusive
+                if(forw[i] != -1 && back[j] != -1 && forw[i] < back[j]) {
+                    ans = min(ans, back[j]-forw[i]-1);
+                }
             }
         }
 
-        if(isSquare()) cout << "SQUARE\n";
-        else cout << "TRIANGLE\n";
+        cout << ans << '\n';
+
+        forw.clear();
+        back.clear();
 
         return;
     }
@@ -81,15 +88,11 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
-    int TC;
-
-    cin >> TC;
-
-    while(TC--)
-        sol.solve();
+    
+    sol.solve();
 
     return 0;
 }
