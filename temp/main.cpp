@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <map>
+#include <algorithm>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -70,10 +71,17 @@ public:
         }
 
         int curr = barIdx;
+        int firstbar;
+
         for(i = day; i <= days[month]; ++i) {
+
             mp[barIdx].push_back(i);
 
+            if(day == 1)
+                firstBar = barIdx;
+
             barIdx = (barIdx+1) % 7;
+
         }
 
         if(barIdx == 0)
@@ -84,6 +92,9 @@ public:
         for(i = day-1; i >= 1; --i) {
             mp[barIdx].push_back(i);
 
+            if(day == 1)
+                firstbar = barIdx;
+
             if(barIdx == 0)
                 curr = 6;
             else
@@ -91,6 +102,11 @@ public:
         }
 
         // printing answer
+        for(i = 0; i < 7; ++i)
+            sort(mp[i].begin(), mp[i].end());
+
+        // overflow case
+        
 
         for(i = 0; i < 7; ++i)
             mp[i].clear();
