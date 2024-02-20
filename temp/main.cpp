@@ -29,6 +29,40 @@ string bars[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 class Solution
 {
    list <int> mp[7];
+
+    void etoTomo(int er, int tomo)
+    {
+        if(tomo > mp[er].size()-1) {
+                cout << "-";
+        }
+
+        auto it = mp[er].begin();
+        int i;
+
+        for(i = 0; i < tomo; ++i)
+            ++it;
+
+        cout << *it;
+    }
+
+   void print_ans()
+   {
+       int i;
+
+       cout << "|---------------------------|\n";
+       cout << "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|\n";
+        cout << "|---------------------------|\n";
+
+        for(j = 0; j < 5; ++j) {          
+
+            for(i = 0; i < 7; ++i) {
+                // days
+                etoTomo(i, j);
+            }
+        }
+
+    
+   }
 public:
     void solve()
     {
@@ -111,6 +145,8 @@ public:
             mp[0].pop_back(31);
             mp[0].push_front(31);
         }
+        else
+            mp[0].front(0);
 
         if(barIdx == 6 && days[month] == 30) {
             mp[0].pop_back(30);
@@ -124,6 +160,26 @@ public:
             mp[1].pop_back(31);
             mp[1].push_front(31);
         }
+        else
+            mp[1].push_front(0);
+
+        // for tue
+        if(firstbar >= 3)
+            mp[2].push_front(0);
+        // for wed
+        if(firstbar >= 4)
+            mp[3].push_front(0);
+        // for thu
+        if(firstbar >= 5)
+            mp[4].push_front(0);
+        // for fri
+        if(firstbar >= 6)
+            mp[5].push_front(0);
+
+        // ready
+        // for(i = 0; i < 7; ++i) {
+
+        // }
 
         // printing answer
         print_ans();
