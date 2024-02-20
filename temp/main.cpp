@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <map>
+#include <list>
 #include <algorithm>
 
 // #include <ext/pb_ds/assoc_container.hpp>
@@ -27,7 +28,7 @@ string bars[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
 class Solution
 {
-    map <int> mp[7];
+   list <int> mp[7];
 public:
     void solve()
     {
@@ -103,10 +104,29 @@ public:
 
         // printing answer
         for(i = 0; i < 7; ++i)
-            sort(mp[i].begin(), mp[i].end());
+            mp[i].sort();
 
         // overflow case
+        if(barIdx == 5 && days[month] == 31) {
+            mp[0].pop_back(31);
+            mp[0].push_front(31);
+        }
+
+        if(barIdx == 6 && days[month] == 30) {
+            mp[0].pop_back(30);
+            mp[0].push_front(30);
+        }
         
+        if(barIdx == 6 && days[month] == 31) {
+            mp[0].pop_back(30);
+            mp[0].push_front(30);
+
+            mp[1].pop_back(31);
+            mp[1].push_front(31);
+        }
+
+        // printing answer
+        print_ans();
 
         for(i = 0; i < 7; ++i)
             mp[i].clear();
