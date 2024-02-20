@@ -6,6 +6,7 @@
 **/
 
 #include <iostream>
+#include <map>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -21,6 +22,7 @@ typedef pair <int, int> pii;
 // typedef tree<int , null_mapped_type ,  less_equal<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_multiset;
 
 int days[14] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+string bars[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
 class Solution
 {
@@ -50,7 +52,48 @@ public:
         month = month * 10 + int(dateStr[3]-'0');
         month = month * 10 + int(dateStr[4]-'0');
 
+        int day = 0;
+        day = day * 10 + int(dateStr[0]-'0');
+        day = day * 10 + int(dateStr[1]-'0');
 
+        string bar;
+        for(i = 11; i <= 13; ++i)
+            bar.push_back(dateStr[i]);
+
+        // bar calculation
+        int barIdx = 0;
+        for(i = 0; i < 7; ++i) {
+            if(bars[i].compare(bar) == 0) {
+                barIdx = i;
+                break;
+            }
+        }
+
+        int curr = barIdx;
+        for(i = day; i <= days[month]; ++i) {
+            mp[barIdx].push_back(i);
+
+            barIdx = (barIdx+1) % 7;
+        }
+
+        if(barIdx == 0)
+            curr = 6;
+        else
+            curr = barIdx - 1;
+
+        for(i = day-1; i >= 1; --i) {
+            mp[barIdx].push_back(i);
+
+            if(barIdx == 0)
+                curr = 6;
+            else
+                curr = barIdx - 1;
+        }
+
+        // printing answer
+
+        for(i = 0; i < 7; ++i)
+            mp[i].clear();
 
 
         return;
