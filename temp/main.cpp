@@ -6,7 +6,6 @@
 **/
 
 #include <iostream>
-#include <vector>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -27,59 +26,19 @@ class Solution
 public:
     void solve()
     {
-        cin >> n; 
+        int i;
+        string inp;
+        
+        getline(cin, inp);
 
-        for(i = 0; i < n; ++i) {
-            cin >> a[i];
+        int year = 0;
+        for(i = 6; i <= 9; ++i) {
+            year = year * 10 + int(dateStr[i]-'0');
         }
 
-        for(i = 0; i < n; ++i) {
-            cin >> b[i];
-        }
-
-        forw.resize(n, -1);
-
-        i = 0;
-        j = 0;
-        while(i < n && j < n) {
-            if(a[i] == b[j]) {
-                forw[j] = i;
-                ++j;
-            }
-
-            ++i;
-        }
-
-        // for back
-        back.resize(n, -1);
-
-        i = n-1;
-        j = n-1;
-        while(i >= 0 && j >= 0) {
-            if(a[i] == b[j]) {
-                back[j] = i;
-                --j;
-            }
-
-            --i;
-        }
-
-        // processing
-        ans = n;
-
-        for(i = 0; i < n; ++i) {
-            for(j = i; j < n; ++j) {
-                // i to j inclusive
-                if(forw[i] != -1 && back[j] != -1 && forw[i] < back[j]) {
-                    ans = min(ans, back[j]-forw[i]-1);
-                }
-            }
-        }
-
-        cout << ans << '\n';
-
-        forw.clear();
-        back.clear();
+        bool leapYear = false;
+        if(year % 4 == 0 || (year % 100 == 0 && year % 400 == 0))
+            leapYear = true;
 
         return;
     }
@@ -91,8 +50,12 @@ int main()
     // cin.tie(NULL);
 
     Solution sol;
-    
-    sol.solve();
+    int TC;
+
+    cin >> TC;
+
+    while(TC--)
+        sol.solve();
 
     return 0;
 }
