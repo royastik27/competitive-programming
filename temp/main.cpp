@@ -6,7 +6,6 @@
 **/
 
 #include <iostream>
-#include <cstring>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -21,99 +20,44 @@ typedef pair <int, int> pii;
 // typedef tree<int , null_mapped_type ,  less<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_set;
 // typedef tree<int , null_mapped_type ,  less_equal<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_multiset;
 
-#define LIM 1000
-
-int row_move[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
-int col_move[8] = { -1, 0, 1, -1, 1, -1, 0, 1 }
-
 class Solution
 {
-    int n, m, a[LIM][LIM], mem[LIM][LIM];
-    ll ans;
+    int a[LIM][LIM], n, m, ans;
+    bitset <10> col;
 
-    bool check(int i, int j, char ch)
+    void run(int row, int sum = 0)
     {
-        if(i < 0 || i == n || j < 0 || j == m)
-            return false;
+        if(row == n) {
+            ans = max(ans, sum);
+            return;
+        }
 
-        return (a[i][j] == ch);
-    }
-
-    int check2(int i, int j)
-    {
-        if(i < 0 || i == n || j < 0 || j == m)
-            return 0;
-
-        return mem[i][j];
-    }
-
-    void first()
-    {
-        int i, j, x, y, k;
-
-        for(i = 0; i < n; ++i) {
-            for(j = 0; j < m; ++j) {
-
-                if(a[i][j] == inp[1]) {
-
-                    for(k = 0; k < 8; ++k) {
-                        x = i + row_move[k];
-                        y = j + col_move[k];
-
-                        if(check(x, y, inp[2]))
-                            ++mem[i][j];
-                    }
-                }
+        int i;
+        for(i = 0; i < m; ++i) {
+            if(!col[i]) {
+                col[i] = true;
+                run(row+1, sum + a[row][i]);
+                col[i] = false;
             }
         }
 
         return;
     }
-
-    void second()
-    {
-        int i, j, res, x, y, k;
-
-        for(i = 0; i < n; ++i) {
-            for(j = 0; j < m; ++j) {
-
-                if(a[i][j] == inp[0]) {
-                    res = 0;
-
-                    for(k = 0; k < 8; ++k) {
-                        x = i + row_move[k];
-                        y = j + col_move[k];
-
-                        res += check2(x, y);
-                    }
-                }
-            }
-
-            ans = max(ans, res);
-        }
-    }
-
 public:
     void solve()
     {
-        int n, m;
-
         cin >> n >> m;
 
-        memset(mem, 0, sizeof(mem));
-
-        for(i = 0; i < n; ++i) {
+        cin >> n >> m;
+        
+        for(i = 0; i < n; ++i)
             for(j = 0; j < m; ++j) {
                 cin >> a[i][j];
             }
-        }
-
-        cin >> inp;
-
-        first();
 
         ans = 0;
-        second();
+        col.reset();
+        run(0);
 
         cout << ans << '\n';
 
