@@ -22,11 +22,52 @@ typedef pair <int, int> pii;
 
 class Solution
 {
+    bool check(int i, int j, char ch)
+    {
+        if(i < 0 || i == n || j < 0 || j == m)
+            return false;
+
+        return (a[i][j] == ch);
+    }
+    void first()
+    {
+        int i, j;
+
+        for(i = 0; i < n; ++i) {
+            for(j = 0; j < m; ++j) {
+
+                if(a[i][j] == inp[1]) {
+
+                    for(k = 0; k < 4; ++k) {
+                        x = i + row_move[k];
+                        y = j + col_move[k];
+
+                        if(check(x, y, inp[2]))
+                            ++mem[i][j];
+                    }
+                }
+            }
+        }
+    }
 
 public:
     void solve()
     {
-        
+        int n, m;
+
+        cin >> n >> m;
+
+        memset(mem, 0, sizeof(mem));
+
+        for(i = 0; i < n; ++i) {
+            for(j = 0; j < m; ++j) {
+                cin >> a[i][j];
+            }
+        }
+
+        cin >> inp;
+
+        first();
 
         return;
     }
@@ -35,7 +76,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // cin.tie(NULL);
 
     Solution sol;
     
