@@ -6,6 +6,8 @@
 **/
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -22,44 +24,64 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-    int a[LIM][LIM], n, m, ans;
-    bitset <10> col;
-
-    void run(int row, int sum = 0)
-    {
-        if(row == n) {
-            ans = max(ans, sum);
-            return;
-        }
-
-        int i;
-        for(i = 0; i < m; ++i) {
-            if(!col[i]) {
-                col[i] = true;
-                run(row+1, sum + a[row][i]);
-                col[i] = false;
-            }
-        }
-
-        return;
-    }
+    vector <ll> p;
 public:
     void solve()
     {
-        cin >> n >> m;
+        ll tot;
 
-        cin >> n >> m;
-        
-        for(i = 0; i < n; ++i)
-            for(j = 0; j < m; ++j) {
-                cin >> a[i][j];
+        cin >> n;
+
+        p[0] = 0;
+        for(i = 1; i <= n; ++i) {
+            cin >> ai;
+            p[i] = p[i-1] + ai;
+        }
+
+        cin >> q;
+
+        while(q--) {
+            cin >> l >> u;
+
+            u = p[l-1] + u;
+
+            LB = lower_bound(p.begin(), p.end(), u);
+
+            if(*LB == u || *LB == u+1) {
+                int r = distance(p.begin(), LB);
+
+                cout << r << '\n';
             }
+            else {
+                r = distance(p.begin(), LB);
 
-        ans = 0;
-        col.reset();
-        run(0);
+                if(l == r) {
+                    tot = p[r] - p[r-1];
+                }
+                else {
+                    --r;
+                    tot = p[r] - p[l-1];
+                }
 
-        cout << ans << '\n';
+                if(tot <= u) {
+                    int cnt = u - tot;
+
+                    ll right = ll(u+1)*u / 2;
+                    ll left = ll(cnt+1)*cnt / 2;
+
+                    cout << (right - left) << '\n'; 
+                }
+                else {
+                    // tot > u
+                    int cnt = (u+1) - tot;
+
+                    ll right = ll(u+1)*u / 2;
+                    ll left = ll(cnt+1)*cnt / 2;
+
+                    cout << (right - left) << '\n'; 
+                }
+            }
+        }
 
         return;
     }
@@ -68,11 +90,15 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
-    
-    sol.solve();
+    int TC;
+
+    cin >> TC;
+
+    while(TC--)
+        sol.solve();
 
     return 0;
 }
