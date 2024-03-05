@@ -26,7 +26,7 @@ class Solution
 public:
     void solve()
     {
-        cout << "BEST OF LUCK!\n";
+        // 
 
         return;
     }
@@ -35,39 +35,15 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
-    
-    sol.solve();
+    int TC;
+
+    cin >> TC;
+
+    while(TC--)
+        sol.solve();
 
     return 0;
 }
-
-// #include <bits/stdc++.h>
- 
-// using namespace std;
- 
-// int main()
-// {
-     
-//     string line = "GeeksForGeeks is a must try";
-     
-//     // Vector of string to save tokens
-//     vector <string> tokens;
-     
-//     // stringstream class check1
-//     stringstream check1(line);
-     
-//     string intermediate;
-     
-//     // Tokenizing w.r.t. space ' '
-//     while(getline(check1, intermediate, ' '))
-//     {
-//         tokens.push_back(intermediate);
-//     }
-     
-//     // Printing the token vector
-//     for(int i = 0; i < tokens.size(); i++)
-//         cout << tokens[i] << '\n';
-// }
