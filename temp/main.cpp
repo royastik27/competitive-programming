@@ -1,11 +1,12 @@
 /**
-* Hello 2022
-* Problem B - Integers Shop
-* TIME: 233 ms
+* [name]
+* Problem 
+* TIME: 
 * AUTHOR: Astik Roy
 **/
 
 #include <iostream>
+#include <vector>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -23,58 +24,94 @@ typedef pair <int, int> pii;
 class Solution
 {
     int n;
+    string s;
 public:
     void solve()
     {
-        int i, left, right, coins, b, e, one_b, one_e, one_ans, left_ans, right_ans;
+        string mapie = "mapie";
+        string map = "map";
+        string pie = "pie";
+        int i, j, k;
+        vector <int> freq;
 
-        cin >> n;
+        cin >> n >> s;
 
-        // for first one
-        cin >> left >> right >> coins;
+        int ans = 0;
+        int lim = n-3;
 
-        b = one_b = left;
-        e = one_e = right;
-        one_ans = left_ans = right_ans = coins;
+        for(i = 0; i <= lim; ++i) {
+            // for mapie
+            j = i;
+            for(k = 0; k < 5; ++k) {
+                int cnt = 0;
+                while(j < n && s[j] == mapie[k]) {
+                    ++j;
+                    ++cnt;
+                }
 
-        cout << coins << '\n';
-
-        // for rests
-        for(i = 1; i < n; ++i) {
-            cin >> left >> right >> coins;
-
-            if(left == b)
-                left_ans = min(left_ans, coins);
-            else if(left < b) {
-                b = left;
-                left_ans = coins;
-            }
-
-            if(right == e)
-                right_ans = min(right_ans, coins);
-            else if(right > e) {
-                e = right;
-                right_ans = coins;
-            }
-
-            // for one
-            if(left <= one_b && right >= one_e) {
+                if(cnt == 0)
+                    break;
                 
-                if(left < one_b || right > one_e)
-                    one_ans = coins;
-                else
-                    one_ans = min(one_ans, coins);
-
-                one_b = left;
-                one_e = right;
+                freq.push_back(cnt);
             }
 
-            // processing for one
-            if(b == one_b && e == one_e)
-                cout << min(one_ans, left_ans+right_ans) << '\n';
-            else
-                cout << (left_ans+right_ans) << '\n';
+            if(k == 5) {
+                // remove mapie
+                ans += min(freq[2], min(freq[0], freq[1]) + min(freq[3], freq[4]));
+                i = j-1;
+                freq.clear();
+                continue;
+            }
+
+
+            // for map
+            j = i;
+            for(k = 0; k < 3; ++k) {
+                int cnt = 0;
+                while(j < n && s[j] == map[k]) {
+                    ++j;
+                    ++cnt;
+                }
+
+                if(cnt == 0)
+                    break;
+                
+                freq.push_back(cnt);
+            }
+
+            if(k == 3) {
+                // remove map
+                ans += min(freq[0], min(freq[1], freq[2]));
+                i = j-1;
+                freq.clear();
+                continue;
+            }
+
+            // for pie
+            j = i;
+            for(k = 0; k < 3; ++k) {
+                int cnt = 0;
+                while(j < n && s[j] == pie[k]) {
+                    ++j;
+                    ++cnt;
+                }
+
+                if(cnt == 0)
+                    break;
+                
+                freq.push_back(cnt);
+            }
+
+            if(k == 3) {
+                // remove pie
+                ans += min(freq[0], min(freq[1], freq[2]));
+                i = j-1;
+                freq.clear();
+                continue;
+            }
         }
+
+        cout << ans << '\n';
 
         return;
     }
@@ -87,9 +124,9 @@ int main()
 
     Solution sol;
     int TC;
-
-    cin >> TC;
     
+    cin >> TC;
+
     while(TC--)
         sol.solve();
 
