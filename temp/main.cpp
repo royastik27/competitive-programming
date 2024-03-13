@@ -24,94 +24,63 @@ typedef pair <int, int> pii;
 class Solution
 {
     int n;
-    string s;
+    vector <ll> a, b;
 public:
     void solve()
     {
-        string mapie = "mapie";
-        string map = "map";
-        string pie = "pie";
-        int i, j, k;
-        vector <int> freq;
+        int i;
+        
+        cin >> n;
 
-        cin >> n >> s;
+        a.resize(n+1);
+        b.resize(n+1);
 
-        int ans = 0;
-        int lim = n-3;
+        for(i = 1; i <= n; ++i) {
+            cin >> a[i];
+        }
 
-        for(i = 0; i <= lim; ++i) {
-            // for mapie
-            j = i;
-            for(k = 0; k < 5; ++k) {
-                int cnt = 0;
-                while(j < n && s[j] == mapie[k]) {
-                    ++j;
-                    ++cnt;
-                }
+        for(i = 1; i <= n; ++i) {
+            cin >> b[i];
+        }
 
-                if(cnt == 0)
-                    break;
-                
-                freq.push_back(cnt);
-            }
+        // processing
+        ll diff, denom, m;
 
-            if(k == 5) {
-                // remove mapie
-                ans += min(freq[2], min(freq[0], freq[1]) + min(freq[3], freq[4]));
-                i = j-1;
-                freq.clear();
+        for(i = 1; i <= n - 3; ++i) {
+            if(a[i] == b[i])
                 continue;
+
+            diff = b[i] - a[i];
+            denom = a[i+1] + a[i+2];
+
+            if(diff % denom != 0) {
+                break;
             }
 
+            m = diff / denom;
 
-            // for map
-            j = i;
-            for(k = 0; k < 3; ++k) {
-                int cnt = 0;
-                while(j < n && s[j] == map[k]) {
-                    ++j;
-                    ++cnt;
-                }
+            if(m < 1)
+                break;
 
-                if(cnt == 0)
-                    break;
-                
-                freq.push_back(cnt);
-            }
+            a[i] = b[i]; // no need
+            if(m & 1) {
+                int temp = a[i+1];
+                a[i+1] = 0 - a[i+2];
+                a[i+2] = 0 - temp;
 
-            if(k == 3) {
-                // remove map
-                ans += min(freq[0], min(freq[1], freq[2]));
-                i = j-1;
-                freq.clear();
-                continue;
-            }
+                a[i+3] = a[i+3] + a[i+1] + a[i+2];
+            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+        }
 
-            // for pie
-            j = i;
-            for(k = 0; k < 3; ++k) {
-                int cnt = 0;
-                while(j < n && s[j] == pie[k]) {
-                    ++j;
-                    ++cnt;
-                }
-
-                if(cnt == 0)
-                    break;
-                
-                freq.push_back(cnt);
-            }
-
-            if(k == 3) {
-                // remove pie
-                ans += min(freq[0], min(freq[1], freq[2]));
-                i = j-1;
-                freq.clear();
-                continue;
+        for(i = 1; i <= n; ++i) {
+            if(a[i] != b[i]) {
+                break;
             }
         }
 
-        cout << ans << '\n';
+        if(i > n)
+            cout << "YES\n";
+        else cout << "NO\n";
 
         return;
     }
@@ -124,7 +93,7 @@ int main()
 
     Solution sol;
     int TC;
-    
+
     cin >> TC;
 
     while(TC--)

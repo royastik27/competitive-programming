@@ -26,7 +26,11 @@ class Solution
 public:
     void solve()
     {
-        // 
+        string s = "Astik";
+
+        s.pop_back();
+
+        cout << s << '\n'; 
 
         return;
     }
@@ -38,11 +42,7 @@ int main()
     cin.tie(NULL);
 
     Solution sol;
-    int TC;
 
-    cin >> TC;
-
-    while(TC--)
         sol.solve();
 
     return 0;
