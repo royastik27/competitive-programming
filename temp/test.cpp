@@ -22,15 +22,34 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-
+    int n, c;
 public:
     void solve()
     {
-        string s = "Astik";
+        int i, ai;
 
-        s.pop_back();
+        cin >> n >> c;
 
-        cout << s << '\n'; 
+        ll total = ll(c+1)*(c+2) / 2, minus = 0;
+        int even, odd;
+
+        even = odd = 0;
+
+        for(i = 0; i < n; ++i) {
+            cin >> ai;
+
+            minus += (ai+1) / 2;
+            minus += c - ai + 1;
+
+            if(ai & 1)
+                minus -= odd;
+            else minus -= even;
+
+            if(ai & 1) ++odd;
+            else ++even;
+        }
+
+        cout << (total - minus) << '\n';
 
         return;
     }
@@ -42,7 +61,11 @@ int main()
     cin.tie(NULL);
 
     Solution sol;
+    int TC;
 
+    cin >> TC;
+
+    while(TC--)
         sol.solve();
 
     return 0;
