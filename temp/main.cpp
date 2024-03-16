@@ -6,6 +6,8 @@
 **/
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -20,66 +22,59 @@ typedef pair <int, int> pii;
 // typedef tree<int , null_mapped_type ,  less<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_set;
 // typedef tree<int , null_mapped_type ,  less_equal<int> , rb_tree_tag , tree_order_statistics_node_update> ordered_multiset;
 
-int row_move[4] = { -1, 1, 0, 0};
-int col_move[4] = { 0, 0, 1, -1 };
-
-#define LIM 220
-
 class Solution
-{   
+{
     int n;
-    bool vis[LIM][LIM];
-    char a[LIM][LIM];
+    vector <int> freq;
 
-    void perm(int row, int col)
+    bool check(int k)
     {
-        if(row < 0 || row > 1 || col < 0 || col > n-1)
-            return;
+        int i;
+        vector <int> fre;
 
-        if(can[row][col] == '>') {
-            if(vis[row][col+1])
-                return;
-            
-            process(row, col+1);
+        for(i = 0; i < k; ++i)
+            fre.push_back(freq[i]);
+
+        sort(fre.begin(), fre.end());
+        int need = 1;
+
+        for(i = 0; i < k; ++i) {
+            if(fre[i] < need)
+                return false;
+
+            ++need;
         }
-        else {
-            if(vis[row][col-1])
-                return;
-            
-            process(row, col-1);
-        }
-        
-        return;
-    }
-    void process(int row, int col)
-    {
-        int i, x, y;
-        vis[row][col] = true;
 
-        for(i = 0; i < 4; ++i) {
-            x = row + row_move[i];
-            y = col + col_move[i];
-
-            perm(x, y);
-        }        
+        return true;
     }
 public:
     void solve()
     {
-        int i;
+        int i, ai;
         
         cin >> n;
 
-        for(i = 0; i < n; ++i)
-            cin >> a[0][i];
-        for(i = 0; i < n; ++i)
-            cin >> a[1][i];
+        freq.resize(n+3);
 
-        memset(vis, 0, sizeof(vis));        
+        for(i = 0; i < n; ++i) {
+            cin >> ai;
+            ++freq[ai];
+        }
 
-        process(0, 0);
+        int low = 0, high = n+1, mid;
 
-        cout << (vis[1][n-1] ? "YES\n" : "NO\n");
+        while(low <= high) {
+            mid = (low + high) / 2;
+
+            if(check(mid))
+                low = mid+1;
+            else
+                high = mid-1;
+        }
+
+        cout << max(0, (low-1)) << '\n';
+
+        freq.clear();        
 
         return;
     }
@@ -88,7 +83,7 @@ public:
 int main()
 {
     ios_base::sync_with_stdio(false);
-    // cin.tie(NULL);
+    cin.tie(NULL);
 
     Solution sol;
     int TC;
@@ -96,7 +91,7 @@ int main()
     cin >> TC;
 
     while(TC--)
-        sol.solve();
+    sol.solve();
 
     return 0;
 }
