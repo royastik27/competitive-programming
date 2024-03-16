@@ -32,13 +32,13 @@ class Solution
         int i;
         vector <int> fre;
 
-        for(i = 0; i < k; ++i)
+        for(i = 0; i <= k; ++i)
             fre.push_back(freq[i]);
 
         sort(fre.begin(), fre.end());
         int need = 1;
 
-        for(i = 0; i < k; ++i) {
+        for(i = 0; i <= k; ++i) {
             if(fre[i] < need)
                 return false;
 
@@ -51,17 +51,17 @@ public:
     void solve()
     {
         int i, ai;
-        
+
         cin >> n;
 
-        freq.resize(n+3);
+        freq.resize(n+5);
 
         for(i = 0; i < n; ++i) {
             cin >> ai;
             ++freq[ai];
         }
 
-        int low = 0, high = n+1, mid;
+        int low = 0, high = n, mid;
 
         while(low <= high) {
             mid = (low + high) / 2;
@@ -72,7 +72,10 @@ public:
                 high = mid-1;
         }
 
-        cout << max(0, (low-1)) << '\n';
+        if(freq[low] && low != 1)
+            ++low;
+
+        cout << max(0, low) << '\n';
 
         freq.clear();        
 

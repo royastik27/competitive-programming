@@ -6,6 +6,8 @@
 **/
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -22,34 +24,24 @@ typedef pair <int, int> pii;
 
 class Solution
 {
-    int n, c;
+    int n;
+    vector <int> a;
 public:
     void solve()
     {
-        int i, ai;
+        cin >> n;
 
-        cin >> n >> c;
+        a.resize(n);
 
-        ll total = ll(c+1)*(c+2) / 2, minus = 0;
-        int even, odd;
+        for(i = 0; i < n; ++i)
+            cin >> a[i];
 
-        even = odd = 0;
+        sort(a.begin(), a.end());
+        bool player = 0;
 
         for(i = 0; i < n; ++i) {
-            cin >> ai;
-
-            minus += (ai+1) / 2;
-            minus += c - ai + 1;
-
-            if(ai & 1)
-                minus -= odd;
-            else minus -= even;
-
-            if(ai & 1) ++odd;
-            else ++even;
+            if(player)
         }
-
-        cout << (total - minus) << '\n';
 
         return;
     }
