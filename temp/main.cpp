@@ -6,8 +6,8 @@
 **/
 
 #include <iostream>
+#include <climits>
 #include <vector>
-#include <algorithm>
 
 // #include <ext/pb_ds/assoc_container.hpp>
 // #include <ext/pb_ds/tree_policy.hpp>
@@ -25,59 +25,66 @@ typedef pair <int, int> pii;
 class Solution
 {
     int n;
-    vector <int> freq;
-
-    bool check(int k)
-    {
-        int i;
-        vector <int> fre;
-
-        for(i = 0; i <= k; ++i)
-            fre.push_back(freq[i]);
-
-        sort(fre.begin(), fre.end());
-        int need = 1;
-
-        for(i = 0; i <= k; ++i) {
-            if(fre[i] < need)
-                return false;
-
-            ++need;
-        }
-
-        return true;
-    }
+    string str;
+    vector <bool> forw, back;
 public:
     void solve()
     {
-        int i, ai;
+        cin >> n >> str;
 
-        cin >> n;
+        str = "#" + str;
 
-        freq.resize(n+5);
+        forw.resize(n+3);
+        back.resize(n+3);
 
-        for(i = 0; i < n; ++i) {
-            cin >> ai;
-            ++freq[ai];
-        }
+        int zero, one;
+        zero = one = 0;
+        forw[0] = true;
 
-        int low = 0, high = n, mid;
-
-        while(low <= high) {
-            mid = (low + high) / 2;
-
-            if(check(mid))
-                low = mid+1;
+        for(i = 1; i <= n; ++i) {
+            if(str[i] == '1')
+                ++one;
             else
-                high = mid-1;
+                ++zero;
+
+            if(zero >= one)
+                forw[i] = true;
+            else
+                forw[i] = false;
+        }
+        
+        back[n+1] = true;
+        zero = one = 0;
+        for(i = n; i >= 0; --i) {
+            if(str[i] == '1')
+                ++one;
+            else
+                ++zero;
+
+            if(one >= zero)
+                back[i] = true;
+            else
+                back[i] = false;
         }
 
-        if(freq[low] && low != 1)
-            ++low;
+        int middle = (n+1) / 2;
+        int mn_dis = INT_MAX;
+        int ans = 0;
 
-        cout << max(0, low) << '\n';
+        for(i = 0; i <= n; ++i) {
+            if(forw[i] && back[i+1]) {
+                // true
+                dis = abs(middle - i);
 
-        freq.clear();        
+                if(dis < mn_dis) {
+                    mn_dis = dis;
+                    ans = i;
+                }
+            }
+        }
+
+        cout << ans << '\n';
+        
 
         return;
     }
@@ -94,7 +101,7 @@ int main()
     cin >> TC;
 
     while(TC--)
-    sol.solve();
+        sol.solve();
 
     return 0;
 }
