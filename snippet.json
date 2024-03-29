@@ -36,7 +36,7 @@
 			"public:",
 				"\tvoid solve()",
 				"\t{",
-				"\t\t// $1\n",
+				"\t\t// $0\n",
 					
 			
 					"\t\treturn;",
@@ -46,7 +46,10 @@
 			"\tios_base::sync_with_stdio(false);",
 			"\t// cin.tie(NULL);\n",
 			"\tSolution sol;",
-			"\t//$0\n",
+			"\t// int TC;\n",
+			"\t// cin >> TC;\n",
+			"\t// while(TC--)",
+			"\t\tsol.solve();\n",
 			"\treturn 0;",
 			"}"
 		],
